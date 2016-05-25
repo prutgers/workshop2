@@ -5,7 +5,7 @@
  */
 package ConnectionPools;
 
-import com.mchange.v2.c3p0.*;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.sql.Connection;
