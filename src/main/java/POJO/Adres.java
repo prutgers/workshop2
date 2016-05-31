@@ -5,13 +5,27 @@ package POJO;
  * @author Sonja
  */
 
-public class Adres {
-     private String straatnaam;     //required
-     private int huisnummer;        //required
-     private String toevoeging;     //optional
-     private String postcode;       //required
-     private String woonplaats;     //required
-     private int adres_id;          //required
+import java.io.Serializable;
+import javax.persistence.*;
+
+@Entity //represents lightweight persistent domain object
+@Table(name="Adres")
+public class Adres implements Serializable {
+ 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE) //sequence generator generates autoincremented sequence number, which becomes the ID for this PK
+    private int adres_id;          //required
+    @Column
+    private String straatnaam;     //required 
+    @Column
+    private int huisnummer;        //required
+    @Column
+    private String toevoeging;     //optional
+    @Column
+    private String postcode;       //required
+    @Column
+    private String woonplaats;     //required
+     
 
     public String getStraatnaam() {
         return straatnaam;
