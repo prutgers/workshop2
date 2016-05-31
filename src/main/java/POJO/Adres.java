@@ -15,15 +15,15 @@ public class Adres implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private int adres_id;          //required
-    @Column
+    @Column(name="Straatnaam")
     private String straatnaam;     //required 
-    @Column
+    @Column(name="Huisnummer")
     private int huisnummer;        //required
-    @Column
+    @Column(name="Toevoeging")
     private String toevoeging;     //optional
-    @Column
+    @Column(name="Postcode")
     private String postcode;       //required
-    @Column
+    @Column(name="Woonplaats")
     private String woonplaats;     //required
      
 
