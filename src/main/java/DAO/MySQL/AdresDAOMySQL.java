@@ -32,7 +32,7 @@ public class AdresDAOMySQL implements AdresDAO {
                     Statement.RETURN_GENERATED_KEYS);
             
             //set values
-            stmntCA.setInt(1, adres.getAdres_id());
+            //stmntCA.setInt(1, adres.getAdres_id());
             stmntCA.setString(1, adres.getStraatnaam());
             stmntCA.setInt(2, adres.getHuisnummer());
             stmntCA.setString(3, adres.getToevoeging());

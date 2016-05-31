@@ -21,6 +21,7 @@ public class Klant implements Serializable {
     private String tussenvoegsel;
     private String email;
     
+    
     public Klant(){
     }
     

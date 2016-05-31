@@ -22,6 +22,11 @@ import java.util.ArrayList;
  * @author Peter
  */
 public class BestellingService {
+    private static BestellingDAO bestellingDAO;
+    
+    public BestellingService(){
+        bestellingDAO = DAOFactory.getBestellingDAO(); 
+    }
     
     public Bestelling create(Bestelling bestelling){
         BestellingDAO dao = DAOFactory.getBestellingDAO();
