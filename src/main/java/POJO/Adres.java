@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class Adres implements Serializable {
  
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE) //sequence generator generates autoincremented sequence number, which becomes the ID for this PK
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private int adres_id;          //required
     @Column
     private String straatnaam;     //required 
