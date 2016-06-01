@@ -13,17 +13,18 @@ import javax.persistence.*;
 public class Adres implements Serializable {
  
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="adres_id")
     private int adres_id;          //required
-    @Column(name="Straatnaam")
+    @Column(name="straatnaam")
     private String straatnaam;     //required 
-    @Column(name="Huisnummer")
+    @Column(name="huisnummer")
     private int huisnummer;        //required
-    @Column(name="Toevoeging")
+    @Column(name="toevoeging")
     private String toevoeging;     //optional
-    @Column(name="Postcode")
+    @Column(name="postcode")
     private String postcode;       //required
-    @Column(name="Woonplaats")
+    @Column(name="woonplaats")
     private String woonplaats;     //required
      
 
