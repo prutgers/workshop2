@@ -6,6 +6,7 @@
 package DAO.Hibernate;
 
 import POJO.*;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -69,5 +70,12 @@ public class KlantDAOHibernate {
     }
     public void save(Klant klant){
         getCurrentSession().save(klant);
+    }
+    public Klant findById(int id){
+        System.out.println("test1");
+        Klant klant = (Klant) getCurrentSession().get(Klant.class, id);
+        System.out.println("test2");
+        System.out.println("test3: " + klant.getKlant_id());
+        return klant;
     }
 }

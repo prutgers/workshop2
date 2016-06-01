@@ -19,7 +19,7 @@ public class Klant implements Serializable {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "klant_id")
-    private int klant_id;
+    private int id;
     @Column(name="voornaam")
     private String voornaam;
     @Column(name="achternaam")
@@ -47,7 +47,7 @@ public class Klant implements Serializable {
     }
     
     public Klant(int klant_id){
-        this.klant_id = klant_id;
+        this.id = klant_id;
         Scanner input = new Scanner(System.in);
         System.out.println("Create a new Klant!");
         System.out.print("Your first name :");
@@ -62,7 +62,7 @@ public class Klant implements Serializable {
     
     public Klant(ResultSet klantData) throws SQLException{
         klantData.next();
-        klant_id = klantData.getInt(1);
+        id = klantData.getInt(1);
         voornaam = klantData.getString(2);
         achternaam = klantData.getString(3);
         tussenvoegsel = klantData.getString(4);
@@ -78,14 +78,14 @@ public class Klant implements Serializable {
      * @return the klant_id
      */
     public int getKlant_id() {
-        return klant_id;
+        return id;
     }
 
     /**
      * @param klant_id the klant_id to set
      */
     public void setKlant_id(int klant_id) {
-        this.klant_id = klant_id;
+        this.id = klant_id;
     }
 
     /**

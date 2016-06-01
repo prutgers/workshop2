@@ -24,4 +24,10 @@ public class KlantService {
        klantDAO.save(klant);
         klantDAO.closeCurrentSessionWithTransaction();
     }
+    public Klant findById(int klantId){
+        klantDAO.openCurrentSessionWithTransaction();
+        Klant klant = klantDAO.findById(klantId);
+        klantDAO.closeCurrentSessionWithTransaction();
+        return klant;
+    }
 }
