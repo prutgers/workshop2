@@ -62,13 +62,14 @@ public class ServiceTest {
         Session s = sf.openSession();
         s.beginTransaction();
         
+        /*
         int i = 12;
         Klant k = (Klant) s.get(Klant.class, i);
         System.out.println(k.getKlant_id());
+        */
         
+      
         
-        
-        /*
         
          List list = s.createQuery("from Klant").list();
         
@@ -79,7 +80,7 @@ public class ServiceTest {
             System.out.println( k.getKlant_id() );
         }
         
-        */
+        
         s.getTransaction().commit();
         s.close();
         sf.close();
