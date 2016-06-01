@@ -7,53 +7,75 @@ package POJO;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.*;
+import javax.persistence.*;
 
 /**
  *
  * @author Gebruiker
  */
+
+@Entity
+@Table(name = "Bestelling")
+
 public class Bestelling implements Serializable {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "bestelling_id")
     private int bestellingID;
+    @Column(name = "klant_id")
     private int klantID;
+    @Column(name = "totaal_prijs")
     private BigDecimal totaalPrijs;
 
+    @OneToMany(mappedBy = "bestelling")
+    /*
+    @JoinTable(name="bestellingartikel",
+      joinColumns=@JoinColumn(name="bestelling_id", referencedColumnName="bestelling_id"),
+      inverseJoinColumns=@JoinColumn(name="artikel_id", referencedColumnName="artikel_id"))
+      */
+    private Set<BestellingArtikel> bestellingArtikelSet =new HashSet<>();;
+   
+    public Bestelling(){
+    }
+    
+    public Set<BestellingArtikel> getBestellingArtikelSet() {
+        return bestellingArtikelSet;
+    }
+
+    public void setBestellingArtikelSet(BestellingArtikel bestellingArtikel) {
+        System.out.println("test");
+        this.bestellingArtikelSet.add(bestellingArtikel);
+        System.out.println("test2");
+    }
+    
     public int getBestellingID() {
         return bestellingID;
     }
-
+    
     public void setBestellingID(int bestellingID) {
         this.bestellingID = bestellingID;
-    }
-
-    public void setKlantID(int klantID) {
-        this.klantID = klantID;
     }
 
     public int getKlantID() {
         return klantID;
     }
+    
+    public void setKlantID(int klantID) {
+        this.klantID = klantID;
+    }
+    
+    public BigDecimal getTotaalPrijs() {
+        return totaalPrijs;
+    }
 
-    public Bestelling(){}
+    public void setTotaalPrijs(BigDecimal totaalPrijs) {
+        this.totaalPrijs = totaalPrijs;
+    }
     
     public Bestelling(BestellingBuilder builder){
         this.bestellingID = builder.bestellingID;
         this.klantID = builder.klantID;
     }
-
-    /**
-     * @return the totaalPrijs
-     */
-    public BigDecimal getTotaalPrijs() {
-        return totaalPrijs;
-    }
-
-    /**
-     * @param totaalPrijs the totaalPrijs to set
-     */
-    public void setTotaalPrijs(BigDecimal totaalPrijs) {
-        this.totaalPrijs = totaalPrijs;
-    }
-
     public static class BestellingBuilder{
         private int bestellingID;
         private int klantID;

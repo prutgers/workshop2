@@ -5,26 +5,58 @@
  */
 package POJO;
 
+import java.io.Serializable;
+import javax.persistence.*;
 /**
  *
  * @author Peter
  */
-public class BestellingArtikel {
+
+@Entity
+@Table(name = "BestellingArtikel")
+
+
+public class BestellingArtikel implements Serializable{
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "bestellingArtikel_Id")
+    private int ID;
     
-    private int bestelling_id;
-    private int artikel_id;
-    private int koppel_id;
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="artikel_id")
+    private Artikel artikel;
+    
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="bestelling_id")
+    private Bestelling bestelling;
+    
+    @Column(name="aantal")
     private int aantal;
-
-
-    public int getBestelling_id() {
-        return bestelling_id;
-    }
     
-    public void setBestelling_id(int bestelling_id) {
-        this.bestelling_id = bestelling_id;
+    public int getID() {
+        return ID;
     }
-    
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public Artikel getArtikel() {
+        return artikel;
+    }
+
+    public void setArtikel(Artikel artikel) {
+        this.artikel = artikel;
+    }
+
+    public Bestelling getBestelling() {
+        return bestelling;
+    }
+
+    public void setBestelling(Bestelling bestelling) {
+        this.bestelling = bestelling;
+    }
+
     public int getAantal() {
         return aantal;
     }
@@ -33,20 +65,62 @@ public class BestellingArtikel {
         this.aantal = aantal;
     }
 
-    public int getArtikel_id() {
-        return artikel_id;
-    }
-    
-    public void setArtikel_id(int artikel_id) {
-        this.artikel_id = artikel_id;
-    }
 
-    public int getKoppel_id() {
-        return koppel_id;
-    }
-
-    public void setKoppel_id(int Koppel_id) {
-        this.koppel_id = Koppel_id;
-    }
-    
 }
+
+
+/*
+public class BestellingArtikel implements Serializable{
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "bestellingArtikel_Id")
+    private int ID;
+    
+    @OneToOne(fetch=FetchType.LAZY)
+
+@JoinColumn(name="artikel_id")
+    private Artikel artikel;
+    
+    @OneToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="bestelling_id")
+    private Bestelling bestelling;
+    
+    @Column(name="aantal")
+    private int aantal;
+    
+    
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public Artikel getArtikel() {
+        return artikel;
+    }
+
+    public void setArtikel(Artikel artikel) {
+        this.artikel = artikel;
+    }
+
+    public Bestelling getBestelling() {
+        return bestelling;
+    }
+
+    public void setBestelling(Bestelling bestelling) {
+        this.bestelling = bestelling;
+    }
+
+    public int getAantal() {
+        return aantal;
+    }
+
+    public void setAantal(int aantal) {
+        this.aantal = aantal;
+    }
+
+
+}
+*/

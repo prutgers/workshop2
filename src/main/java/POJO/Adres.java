@@ -1,5 +1,10 @@
 package POJO;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.*;
+
 /**
  *
  * @author Sonja
@@ -7,26 +12,24 @@ package POJO;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
-@Entity //represents lightweight persistent domain object
-@Table(name="Adres")
-public class Adres implements Serializable {
- 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="adres_id")
-    private int adres_id;          //required
-    @Column(name="straatnaam")
-    private String straatnaam;     //required 
-    @Column(name="huisnummer")
-    private int huisnummer;        //required
-    @Column(name="toevoeging")
-    private String toevoeging;     //optional
-    @Column(name="postcode")
-    private String postcode;       //required
-    @Column(name="woonplaats")
-    private String woonplaats;     //required
      
+@Entity
+@Table(name = "adres")
+public class Adres implements Serializable {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "adres_id")
+     private int adres_id;          //required
+    @Column(name="straatnaam")
+     private String straatnaam;     //required
+    @Column(name="huisnummer")
+     private int huisnummer;        //required
+    @Column(name="toevoeging")
+     private String toevoeging;     //optional
+    @Column(name="postcode")
+     private String postcode;       //required
+    @Column(name="woonplaats")
+     private String woonplaats;     //required
+
 
     public String getStraatnaam() {
         return straatnaam;

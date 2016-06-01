@@ -5,24 +5,45 @@
  */
 package POJO;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Scanner;
+import java.sql.*;
+import java.util.*;
 import java.io.Serializable;
-
+import javax.persistence.*;
 /**
  *
  * @author lucas
  */
+@Entity
+@Table(name = "klant")
 public class Klant implements Serializable {
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "klant_id")
     private int klant_id;
+    @Column(name="voornaam")
     private String voornaam;
+    @Column(name="achternaam")
     private String achternaam;
+    @Column(name="tussenvoegsel")
     private String tussenvoegsel;
+    @Column(name="email")
     private String email;
-    
+    @ManyToMany
+    @JoinTable(name="koppelklantadres",
+      joinColumns=@JoinColumn(name="klant_id", referencedColumnName="klant_id"),
+      inverseJoinColumns=@JoinColumn(name="adres_id", referencedColumnName="adres_id"))
+    private Set<Adres> adresSet;
     
     public Klant(){
+        adresSet= new HashSet<>();
+    }
+    
+    public Set<Adres> getAdresSet() {
+        return adresSet;
+    }
+
+    public void setAdresSet(Adres adres) {
+        this.adresSet.add(adres);
     }
     
     public Klant(int klant_id){

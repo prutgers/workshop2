@@ -6,16 +6,11 @@
 package DAO.Hibernate;
 
 import ConnectionPools.DBConnector;
-import POJO.Bestelling;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import POJO.*;
+import interfaceDAO.IBestellingDAO;
+import java.sql.*;
 import java.util.ArrayList;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -24,7 +19,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
  *
  * @author Gebruiker
  */
-public class BestellingDAOHibernate {
+public class BestellingDAOHibernate implements IBestellingDAO{
     
     private Session currentSession;
     private Transaction currentTransaction;
@@ -68,25 +63,32 @@ public class BestellingDAOHibernate {
 
     public SessionFactory getSessionFactory(){
         StandardServiceRegistry ssrb = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
-        MetadataSources ms = new MetadataSources(ssrb).addAnnotatedClass(Bestelling.class);
+        MetadataSources ms = new MetadataSources(ssrb);
+        ms.addAnnotatedClass(Bestelling.class);
+        ms.addAnnotatedClass(BestellingArtikel.class);
+        ms.addAnnotatedClass(Artikel.class);
         SessionFactory sf = ms.buildMetadata().buildSessionFactory();
         return sf;
     }
 
+    @Override
     public Bestelling save (Bestelling bestelling) {
         getCurrentSession().save(bestelling);
         return bestelling;
     }
     
+    @Override
     public Bestelling findById(int BestellingId){
         Bestelling bestelling = (Bestelling) getCurrentSession().get(Bestelling.class, BestellingId);
         return bestelling;
     }
 
+    @Override
     public ArrayList<Bestelling> findAll(){
         ArrayList<Bestelling> bestellingen = (ArrayList<Bestelling>) getCurrentSession().createQuery("from bestelling").list();
         return bestellingen;
     }
+    @Override
     public ArrayList<Bestelling> findByKlantId(int klantId){
         Query query = getCurrentSession().createQuery("from Bestelling where id = :klantId");
         query.setParameter("klantId", klantId);
@@ -94,6 +96,7 @@ public class BestellingDAOHibernate {
         return bestellingen;
     }
     
+    @Override
     public void update(Bestelling bestelling){
         getCurrentSession().update(bestelling);
     }
@@ -134,7 +137,15 @@ public class BestellingDAOHibernate {
         }
     }
     
-    public void deleteBestelling(Bestelling bestelling){
+    @Override
+    public void delete(Bestelling bestelling){
         getCurrentSession().delete(bestelling);
     }
+
+    @Override
+    public void delete(int bestellingID) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+
 }

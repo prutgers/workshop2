@@ -5,10 +5,23 @@
  */
 package Service;
 
+import DAO.Hibernate.*;
+import POJO.*;
+
 /**
  *
  * @author Peter
  */
 public class KlantService {
+    private static KlantDAOHibernate klantDAO;
     
+    public KlantService(){
+        klantDAO = new KlantDAOHibernate();
+    }
+    //CREATE BESTELLING
+    public void create(Klant klant){
+        klantDAO.openCurrentSessionWithTransaction();
+       klantDAO.save(klant);
+        klantDAO.closeCurrentSessionWithTransaction();
+    }
 }

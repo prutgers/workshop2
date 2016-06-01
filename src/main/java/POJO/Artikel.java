@@ -7,23 +7,29 @@ package POJO;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-/**
- *safsdafsafas
- * @author Peter en Herman
- */
+@Entity
+@Table(name = "artikel")
+
 public class Artikel {
-    
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "artikel_id")
     private int artikel_id;
+    @Column(name = "artikel_naam")
     private String artikel_naam;
+    @Column(name = "artikel_voorraad")
     private int artikel_voorraad;
+    @Column(name = "artikel_prijs")
     private BigDecimal artikel_prijs;
-
-  
     
     public Artikel(){
     }
-
     Artikel(ArtikelBuilder artikelBuilder) {
         this.artikel_naam = artikelBuilder.getArtikel_naam();
         this.artikel_voorraad = artikelBuilder.getArtikel_voorraad();
