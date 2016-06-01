@@ -70,7 +70,7 @@ public class AdresDAOHibernate {
 
     public ArrayList<Adres> readAdres() {
         ArrayList<Adres> adresGegevens = (ArrayList<Adres>)getCurrentSession()
-                .createQuery("from adres").list();
+                .createQuery("from Adres").list();
         return adresGegevens;
     }
 
