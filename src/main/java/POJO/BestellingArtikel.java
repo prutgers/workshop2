@@ -30,8 +30,8 @@ public class BestellingArtikel implements Serializable{
     @JoinColumn(name="bestelling_id")
     private Bestelling bestelling;
     
-    //@Column(name="aantal")
-    //private int aantal;
+    @Column(name="aantal")
+    private int aantal;
     
     public int getID() {
         return ID;
@@ -57,7 +57,7 @@ public class BestellingArtikel implements Serializable{
         this.bestelling = bestelling;
     }
 
-    /*
+    
     public int getAantal() {
         return aantal;
     }
@@ -65,7 +65,7 @@ public class BestellingArtikel implements Serializable{
     public void setAantal(int aantal) {
         this.aantal = aantal;
     }
-*/
+
     public int getBestelling_id() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
