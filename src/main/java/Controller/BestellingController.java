@@ -77,7 +77,7 @@ public class BestellingController {
         bestelling.setKlantID(view.getKlantID());
         
         BestellingService BS = new BestellingService();
-        Bestelling newBestelling = BS.create(bestelling);
+        Bestelling newBestelling = BS.save(bestelling);
         createKoppel(newBestelling.getBestellingID());
         
     }
@@ -98,7 +98,6 @@ public class BestellingController {
         BestellingArtikelView view = new BestellingArtikelView();
         view.readUpdate();
         
-          
         BestellingArtikel koppel = new BestellingArtikel();
         koppel.setArtikel_id(view.getArtikelID());
         koppel.setBestelling_id(view.getBestellingID());
@@ -131,7 +130,7 @@ public class BestellingController {
         BestellingView view = new BestellingView();
         view.readBestellingID();
         BestellingService BS = new BestellingService();
-        view.print(BS.readByID(view.getBestellingID()));
+        view.print(BS.findByID(view.getBestellingID()));
     }
     public static void readByKlantID(){
         BestellingView view = new BestellingView();

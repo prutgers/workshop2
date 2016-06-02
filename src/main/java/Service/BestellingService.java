@@ -25,7 +25,7 @@ public class BestellingService {
         bestellingArtikelDAO = new BestellingArtikelDAOHibernate();
     }
     //CREATE BESTELLING
-    public Bestelling create(Bestelling bestelling){
+    public Bestelling save(Bestelling bestelling){
         bestellingDAO.openCurrentSessionWithTransaction();
         Bestelling newBestelling = bestellingDAO.save(bestelling);
         bestellingDAO.closeCurrentSessionWithTransaction();
@@ -63,8 +63,11 @@ public class BestellingService {
     public ArrayList<Bestelling>readAll(){
         return bestellingDAO.findAll();
     }
-    public Bestelling readByID(int bestellingID){
-        return bestellingDAO.findById(bestellingID);
+    public Bestelling findByID(int bestellingID){
+        bestellingDAO.openCurrentSessionWithTransaction();
+        Bestelling bestelling = bestellingDAO.findById(bestellingID);
+        bestellingDAO.closeCurrentSessionWithTransaction();
+        return bestelling;
     }
     
     public ArrayList<Bestelling> readByKlantID(int klantID){

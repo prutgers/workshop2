@@ -22,7 +22,18 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 public class ServiceTest {
     public static void main(String[]args){
         BestellingService BServ = new BestellingService();           
+        Bestelling b = BServ.findByID(1);
         
+        Set<BestellingArtikel> regels = b.getBestellingArtikelSet();
+        for(BestellingArtikel a : regels){
+            System.out.println(a.getArtikel().getArtikel_naam());
+        }
+        
+        System.exit(0);
+        
+        
+        
+        /*
         KlantService ks = new KlantService();
         Klant k = ks.findById(21);
         Set<Adres> list =  k.getAdresSet();
@@ -34,6 +45,7 @@ public class ServiceTest {
         
         System.exit(0);
 
+*/
     }
     
 }

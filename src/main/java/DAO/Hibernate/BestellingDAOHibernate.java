@@ -19,6 +19,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
  *
  * @author Gebruiker
  */
+
 public class BestellingDAOHibernate implements IBestellingDAO{
     
     private Session currentSession;
