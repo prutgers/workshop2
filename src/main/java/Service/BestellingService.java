@@ -47,7 +47,6 @@ public class BestellingService {
         //Belangrijk om eerst het koppel te verwijderen voor de bestelling anders
         //gaat MySQL zeuren over contraints
         deleteKoppelMetBestellingID(bestellingID);
-        
         BestellingArtikelDAO baDAO = DAOFactory.getBestellingArtikelDAO();
         baDAO.deleteKoppelMetBestellingID(bestellingID);
     }
