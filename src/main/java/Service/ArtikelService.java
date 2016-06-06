@@ -38,11 +38,11 @@ public class ArtikelService {
     }
     
     public Artikel readByID(int artikel_id){
-        ArtikelView aView = new ArtikelView();
-        aView.readArtikelById();
+        //ArtikelView aView = new ArtikelView();
+        //aView.readArtikelById();
         
         ArtikelDAO dao = DAOFactory.getArtikelDAO();
-        Artikel artikel = dao.readArtikel(aView.getArtikel_id());
+        Artikel artikel = dao.readArtikel(artikel_id);
         return artikel;
     }
     

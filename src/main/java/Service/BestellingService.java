@@ -22,31 +22,37 @@ public class BestellingService {
     }
     
     //create bestelling
-    public Bestelling save(Bestelling bestelling){
+    public void save(Bestelling bestelling){
         DAO.openCurrentSessionWithTransaction();
         Bestelling newBestelling = DAO.save(bestelling);
         DAO.closeCurrentSessionWithTransaction();
-        return newBestelling;
     }
 
         //delete koppel
     public void delete(int bestellingId){
         Bestelling bestelling = findById(bestellingId);
+        DAO.openCurrentSessionWithTransaction();
         DAO.delete(bestelling); 
+        DAO.closeCurrentSessionWithTransaction();
+    }
+    public void delete(Bestelling bestelling){
+        DAO.openCurrentSessionWithTransaction();
+        DAO.delete(bestelling); 
+        DAO.closeCurrentSessionWithTransaction();
     }
 
     //read all bestelling
-    public ArrayList<Bestelling>readAll(){
-        DAO.openCurrentSessionWithTransaction();
+    public ArrayList<Bestelling>findAll(){
+        DAO.openCurrentSession();
         ArrayList<Bestelling> bestellingen = DAO.findAll();
-        DAO.closeCurrentSessionWithTransaction();
+        DAO.closeCurrentSession();
         return bestellingen;
     }
     //read bestelling
     public Bestelling findById(int bestellingId){
-        DAO.openCurrentSessionWithTransaction();
+        DAO.openCurrentSession();
         Bestelling bestelling = DAO.findById(bestellingId);
-        DAO.closeCurrentSessionWithTransaction();
+        DAO.closeCurrentSession();
         return bestelling;
     }
     

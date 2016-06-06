@@ -45,7 +45,9 @@ public class BestellingArtikelService {
     }    
     
     public void delete(int bestellingArtikelID){
+        DAO.openCurrentSessionWithTransaction();
         BestellingArtikelDAO dao = DAOFactory.getBestellingArtikelDAO();
         DAO.delete(bestellingArtikelID);
+        DAO.closeCurrentSessionWithTransaction();
     }
 }

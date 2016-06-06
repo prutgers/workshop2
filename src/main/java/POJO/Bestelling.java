@@ -27,7 +27,7 @@ public class Bestelling implements Serializable {
     @Column(name = "totaal_prijs")
     private BigDecimal totaalPrijs;
 
-    @OneToMany(mappedBy = "bestelling")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "bestelling")
     /*
     @JoinTable(name="bestellingartikel",
       joinColumns=@JoinColumn(name="bestelling_id", referencedColumnName="bestelling_id"),
@@ -43,9 +43,9 @@ public class Bestelling implements Serializable {
     }
 
     public void setBestellingArtikelSet(BestellingArtikel bestellingArtikel) {
-        System.out.println("test");
+        System.out.println("testBAS");
         this.bestellingArtikelSet.add(bestellingArtikel);
-        System.out.println("test2");
+        System.out.println("test2BAS");
     }
     
     public int getBestellingID() {
