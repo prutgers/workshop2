@@ -8,6 +8,8 @@ package DAO.Hibernate;
 import POJO.Artikel;
 import POJO.Bestelling;
 import POJO.BestellingArtikel;
+import java.util.ArrayList;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -70,8 +72,29 @@ public class BestellingArtikelDAOHibernate {
         SessionFactory sf = ms.buildMetadata().buildSessionFactory();
         return sf;
     }
+    
     public BestellingArtikel save (BestellingArtikel bestellingArtikel) {
         getCurrentSession().save(bestellingArtikel);
         return bestellingArtikel;
+    }
+    public ArrayList<BestellingArtikel> findByBestellingId(int bestellingId){
+        Query query = getCurrentSession().createQuery("from BestellingArtikel where bestelling_id = :bestellingId");
+        query.setParameter("bestellingId", bestellingId);
+        ArrayList<BestellingArtikel> bestellingArtikelSet = (ArrayList<BestellingArtikel>) query.list();
+        return bestellingArtikelSet;
+    }
+    
+    public BestellingArtikel findById(int bestellingArtikelId){
+        BestellingArtikel bestellingArtikel = (BestellingArtikel) getCurrentSession().get(BestellingArtikel.class, bestellingArtikelId);
+        return bestellingArtikel;
+    }
+    
+    public void update(BestellingArtikel bestellingArtikel){
+        getCurrentSession().update(bestellingArtikel);
+    }
+    
+    public void delete(int bestellingArtikelId){
+        BestellingArtikel bestellingArtikel = findById(bestellingArtikelId);
+        getCurrentSession().delete(bestellingArtikel);
     }
 }

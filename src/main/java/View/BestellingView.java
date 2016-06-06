@@ -12,60 +12,103 @@ import POJO.BestellingArtikel;
 import formatMessage.PrintFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  *
  * @author Gebruiker
  */
 public class BestellingView {
-    int klantID;
+    int klantId;
+    int aantal;
+    int artikelId;
+    int bestellingId;
 
-    public int getKlantID() {
-        return klantID;
+    public int getKlantId() {
+        return klantId;
     }
 
-    public void setKlantID(int klantID) {
-        this.klantID = klantID;
+    public void setKlantId(int klantId) {
+        this.klantId = klantId;
     }
 
-    public int getBestellingID() {
-        return bestellingID;
+    public int getAantal() {
+        return aantal;
     }
 
-    public void setBestellingID(int bestellingID) {
-        this.bestellingID = bestellingID;
+    public void setAantal(int aantal) {
+        this.aantal = aantal;
     }
-    int bestellingID;
+
+    public int getArtikelId() {
+        return artikelId;
+    }
+
+    public void setArtikelId(int artikelId) {
+        this.artikelId = artikelId;
+    }
+
+    public int getBestellingId() {
+        return bestellingId;
+    }
+
+    public void setBestellingId(int bestellingId) {
+        this.bestellingId = bestellingId;
+    }
     
     public void readKlantID(){
         Scanner input = new Scanner(System.in);
         System.out.print("Voer het klant ID in: ");    
-        this.klantID = input.nextInt();
+        this.klantId = input.nextInt();
+        System.out.print("Voer het artikel ID in: ");    
+        this.artikelId = input.nextInt();
+        System.out.print("Voer het aantal in: ");    
+        this.aantal = input.nextInt();
     }
+    public void addArtikel(){
+        Scanner input = new Scanner(System.in);
+        System.out.print("Voer het bestelling ID in: ");    
+        this.klantId = input.nextInt();
+        System.out.print("Voer het artikel ID in: ");    
+        this.artikelId = input.nextInt();
+        System.out.print("Voer het aantal in: ");    
+        this.aantal = input.nextInt();
+    }
+    public void updateArtikel(){
+        Scanner input = new Scanner(System.in);
+        System.out.print("Voer het bestelling ID in: ");    
+        this.klantId = input.nextInt();
+        System.out.print("Voer het artikel ID in: ");    
+        this.artikelId = input.nextInt();
+        System.out.print("Voer het aantal in: ");    
+        this.aantal = input.nextInt();
+    }
+    
     public void readBestellingID(){
         Scanner input = new Scanner(System.in);
         System.out.print("Voer het bestelling ID in: ");
-        this.bestellingID = input.nextInt();
+        this.bestellingId = input.nextInt();
     }
     
-    public void print(ArrayList<Bestelling> list){
+    public void printBestellingen(ArrayList<Bestelling> list){
         PrintFormat.printHeader("BESTELLINGGEGEVENS");
         System.out.printf("%15s\t\t| %15s\t\t|\n", "Bestelling ID", "Klant ID");
         for(Bestelling e : list){
             System.out.printf("%15d\t\t| %15d\t\t|\n",e.getBestellingID(), e.getKlantID());
         }
     }
-    public void printArtikelLijst(ArrayList<BestellingArtikel> list){
-        Scanner input = new Scanner(System.in);
-        PrintFormat.printHeader("ARTIKELLIJST");
-        System.out.printf("%15s\t\t| %15s\t\t|\n", "Artikel ID", 
-                "Aantal");
+    public void printArtikelen(Set<BestellingArtikel> list){
+        PrintFormat.printHeader("BESTELLINGARTIKEL GEGEVENS");
+        System.out.printf("%15s\t\t| %15s\t\t|\n", "aantal", "artikel");
         for(BestellingArtikel e : list){
-             System.out.printf("%15s\t\t| %15d\t\t|\n",e.getArtikel().getArtikel_naam(), e.getAantal());  
+            System.out.printf("%15d\t\t| %15s\t\t|\n",e.getAantal(), e.getArtikel().getArtikel_naam());
         }
     }
     public void print(Bestelling bestelling){
         System.out.println("Bestelling ID: " + bestelling.getBestellingID());
         System.out.println("Klant ID: " + bestelling.getKlantID());
+    }
+    public void keuzeFout(){
+        System.out.println(" voeg opnieuw in");
     }
 }

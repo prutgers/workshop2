@@ -8,11 +8,13 @@ package Controller;
 import DAOFactory.DAOFactory;
 import DAO.MySQL.BestellingDAOMySQL;
 import POJO.*;
-import Service.BestellingService;
+import Controller.*;
+import Service.*;
 import View.*;
 import interfaceDAO.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Set;
 
 
 /**
@@ -20,20 +22,23 @@ import java.util.ArrayList;
  * @author Gebruiker
  */
 public class BestellingController {
+    public static BestellingView view = new BestellingView();
+    public static BestellingService BS = new BestellingService();
+    
     public static void startKeuze(){
-        BestellingKeuzeView view = new BestellingKeuzeView();
-        view.keuzeView();
+        BestellingKeuzeView keuzeView = new BestellingKeuzeView();
+        keuzeView.keuzeView();
         
       
-        switch (view.getSelect()) {
+        switch (keuzeView.getSelect()) {
             case 1:
-                BestellingController.create();
+                create();
                 break;
             case 2:
-                createKoppel();
+                update();
                 break;
             case 3:
-                update();
+                BestellingArtikelController.update();
                 break;
             case 4:
                 readAll();
@@ -42,13 +47,15 @@ public class BestellingController {
                 readByID();
                 break;
             case 6:
+                //haal alle bestellingen op van een klant
                 readByKlantID();
                 break;
             case 7:
-                readKoppel();
+                //haal alle artikelen (bestellingArtikel op van een klant
+                readArtikelen();
                 break;
             case 8:
-                deleteKoppel();
+                BestellingArtikelController.delete();
                 break;
             case 9:
                 delete();
@@ -60,7 +67,7 @@ public class BestellingController {
                 view.keuzeFout();
                 break;
             }
-        if(view.getSelect() != 0){
+        if(keuzeView.getSelect() != 0){
             startKeuze();
         }
         
@@ -69,109 +76,69 @@ public class BestellingController {
         
         //maak een nieuwe bestellingview waarin je vraagt voor welke klant
         //de bestelling is
-        BestellingView view = new BestellingView();
         view.readKlantID();
         
-        //Maakt een nieuwe bestelling en zet de klantID
+        //Nieuwe Bestelling
         Bestelling bestelling = new Bestelling();
-        bestelling.setKlantID(view.getKlantID());
-        
-        BestellingService BS = new BestellingService();
-        Bestelling newBestelling = BS.save(bestelling);
-        createKoppel(newBestelling.getBestellingID());
-        
-    }
-    //maakt nieuw koppel aan voor bestaande bestelling
-    public static void createKoppel(){
-        BestellingArtikelView view  = new BestellingArtikelView();
-        view.readUpdate();
+        bestelling.setKlantID(view.getKlantId());
 
-        BestellingArtikel koppel = new BestellingArtikel();
-        koppel.setBestelling_id(view.getBestellingID());
-        koppel.setArtikel_id(view.getArtikelID());
-        koppel.setAantal(view.getAantal());
-        BestellingService BS = new BestellingService();
-        BS.createKoppel(koppel);
+        //Nieuw artikel
+        ArtikelService AS = new ArtikelService();
+        Artikel artikel = AS.readByID(view.getArtikelId());
         
+        //Nieuw koppel
+        BestellingArtikel koppel = new BestellingArtikel();
+        koppel.setAantal(view.getAantal());
+        koppel.setArtikel(artikel);
+        koppel.setBestelling(bestelling);
+        
+        bestelling.setBestellingArtikelSet(koppel);
+        BS.save(bestelling);
     }
+
     public static void update(){
-        BestellingArtikelView view = new BestellingArtikelView();
-        view.readUpdate();
+        view.addArtikel();
+        //haal bestelling op
+        Bestelling bestelling = BS.findById(view.getBestellingId());
         
-        BestellingArtikel koppel = new BestellingArtikel();
-        koppel.setArtikel_id(view.getArtikelID());
-        koppel.setBestelling_id(view.getBestellingID());
-        koppel.setAantal(view.getAantal());
-       
-        BestellingService BS = new BestellingService();
-        BS.update(koppel);
+        //haal artikel op
+        Artikel artikel = new ArtikelService().readByID(view.getArtikelId());
         
-    }
-    public static void delete(){
-        BestellingView view = new BestellingView();
-        view.readBestellingID();
-
-        BestellingService BS = new BestellingService();
-        BS.deleteBestelling(view.getBestellingID());
-    }
-    public static void deleteKoppel(){
-        BestellingArtikelView view = new BestellingArtikelView();
-        view.readDelete();
-        BestellingService BS = new BestellingService();
-        BS.deleteKoppel(view.getBestellingID(),view.getArtikelID());
+        //maak nieuw koppel aan
+        BestellingArtikel bestellingArtikel = new BestellingArtikel();
+        bestellingArtikel.setAantal(view.getAantal());
+        bestellingArtikel.setArtikel(artikel);
+        bestellingArtikel.setBestelling(bestelling);
+        
+        //voeg nieuw koppel toe
+        bestelling.setBestellingArtikelSet(bestellingArtikel);
+        
+        BS.update(bestelling);
     }
 
     public static void readAll(){
-        BestellingView view = new BestellingView();
-        BestellingService BS = new BestellingService();
-        view.print(BS.readAll());
+        view.printBestellingen(BS.readAll());
     }
+    
     public static void readByID(){
-        BestellingView view = new BestellingView();
         view.readBestellingID();
-        BestellingService BS = new BestellingService();
-        view.print(BS.findByID(view.getBestellingID()));
+        view.print(BS.findById(view.getBestellingId()));
     }
+    
     public static void readByKlantID(){
-        BestellingView view = new BestellingView();
         view.readKlantID();
-        BestellingService BS = new BestellingService();
-        view.print(BS.readByKlantID(view.getKlantID()));
-    }
-    public static void readKoppel(){
-        BestellingView view = new BestellingView();
-        view.readBestellingID();
-        BestellingService BS = new BestellingService();
-        view.printArtikelLijst(BS.readKoppel(view.getBestellingID()));
+        view.printBestellingen(BS.readByKlantID(view.getKlantId()));
     }
     
-    
-    /**
-     * Alleen automatisch 
-     * createBestelArtikelMenu koppelt artikelen en bestellingen aan elkaar.
-     * 1 methode met argumenten voor automatische invoer
-     */
-    public static void createKoppel(int bestellingID){
-        BestellingArtikelView view  = new BestellingArtikelView();
-        view.readCreate();
+    public static void readArtikelen(){
+        view.readKlantID();
+        //haal bestelling op
+        Bestelling bestelling = BS.findById(view.getBestellingId());
+        view.printArtikelen(bestelling.getBestellingArtikelSet());
+    }
 
-        BestellingArtikel koppel = new BestellingArtikel();
-        koppel.setBestelling_id(bestellingID);
-        koppel.setArtikel_id(view.getArtikelID());
-        koppel.setAantal(view.getAantal());
-        
-        BestellingService BS = new BestellingService();
-        BS.createKoppel(koppel);
+    public static void delete(){
+        view.readBestellingID();
+        BS.delete(view.getBestellingId());
     }
-    
-    
-    //deze code wordtnog niet gebruikt
-    public static BigDecimal getArtikelPrijs(int artikel_id){
-        ArtikelDAO dao = DAOFactory.getArtikelDAO();
-        Artikel artikel = dao.readArtikel(artikel_id);
-        BigDecimal totaal = artikel.getArtikel_prijs(); // moet nog vermenigvuldien met het aantal
-        return totaal;
-    }
-    
-    
 }

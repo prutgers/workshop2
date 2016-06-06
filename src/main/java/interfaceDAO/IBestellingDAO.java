@@ -24,6 +24,4 @@ public interface IBestellingDAO {
     public void update(Bestelling bestelling);
     
     public void delete(Bestelling bestelling);
-
-    public void delete(int bestellingID);
 }

@@ -6,10 +6,8 @@
 package Service;
 
 import DAO.Hibernate.*;
-import DAOFactory.DAOFactory;
 import POJO.*;
 import interfaceDAO.*;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
@@ -17,73 +15,53 @@ import java.util.ArrayList;
  * @author Peter
  */
 public class BestellingService {
-    private static BestellingDAOHibernate bestellingDAO;
-    private static BestellingArtikelDAOHibernate bestellingArtikelDAO;
+    private static BestellingDAOHibernate DAO;
     
     public BestellingService(){
-        bestellingDAO = new BestellingDAOHibernate();
-        bestellingArtikelDAO = new BestellingArtikelDAOHibernate();
+        DAO = new BestellingDAOHibernate();
     }
-    //CREATE BESTELLING
+    
+    //create bestelling
     public Bestelling save(Bestelling bestelling){
-        bestellingDAO.openCurrentSessionWithTransaction();
-        Bestelling newBestelling = bestellingDAO.save(bestelling);
-        bestellingDAO.closeCurrentSessionWithTransaction();
+        DAO.openCurrentSessionWithTransaction();
+        Bestelling newBestelling = DAO.save(bestelling);
+        DAO.closeCurrentSessionWithTransaction();
         return newBestelling;
     }
-    //maakt nieuw koppel aan voor bestaande bestelling
-    public void createKoppel(BestellingArtikel koppel){
-        bestellingArtikelDAO.openCurrentSessionWithTransaction();
-        bestellingArtikelDAO.save(koppel);
-        bestellingArtikelDAO.closeCurrentSessionWithTransaction();
-    }
-    
-    public void update(BestellingArtikel koppel){
-        BestellingArtikelDAO dao = DAOFactory.getBestellingArtikelDAO(); 
-        dao.updateKoppel(koppel);
-    }
-    
-    public void deleteBestelling(int bestellingID){
-        //Belangrijk om eerst het koppel te verwijderen voor de bestelling anders
-        //gaat MySQL zeuren over contraints
-        deleteKoppelMetBestellingID(bestellingID);
-        BestellingArtikelDAO baDAO = DAOFactory.getBestellingArtikelDAO();
-        baDAO.deleteKoppelMetBestellingID(bestellingID);
-    }
-    
-    public void deleteKoppelMetBestellingID(int bestellingID){
-        bestellingDAO.delete(bestellingID);       
-    }
-    public void deleteKoppel(int bestellingID, int artikelID){
-        BestellingArtikelDAO dao = DAOFactory.getBestellingArtikelDAO();
-        dao.deleteKoppel(bestellingID, artikelID);
+
+        //delete koppel
+    public void delete(int bestellingId){
+        Bestelling bestelling = findById(bestellingId);
+        DAO.delete(bestelling); 
     }
 
+    //read all bestelling
     public ArrayList<Bestelling>readAll(){
-        return bestellingDAO.findAll();
+        DAO.openCurrentSessionWithTransaction();
+        ArrayList<Bestelling> bestellingen = DAO.findAll();
+        DAO.closeCurrentSessionWithTransaction();
+        return bestellingen;
     }
-    public Bestelling findByID(int bestellingID){
-        bestellingDAO.openCurrentSessionWithTransaction();
-        Bestelling bestelling = bestellingDAO.findById(bestellingID);
-        bestellingDAO.closeCurrentSessionWithTransaction();
+    //read bestelling
+    public Bestelling findById(int bestellingId){
+        DAO.openCurrentSessionWithTransaction();
+        Bestelling bestelling = DAO.findById(bestellingId);
+        DAO.closeCurrentSessionWithTransaction();
         return bestelling;
     }
     
+    //read bestelling by klantId
     public ArrayList<Bestelling> readByKlantID(int klantID){
-        return bestellingDAO.findByKlantId(klantID);
+        DAO.openCurrentSessionWithTransaction();
+        ArrayList<Bestelling> bestellingen = DAO.findByKlantId(klantID);
+        DAO.closeCurrentSessionWithTransaction();
+        return bestellingen;
     }
     
-    public ArrayList<BestellingArtikel> readKoppel(int bestellingID){
-        BestellingArtikelDAO dao = DAOFactory.getBestellingArtikelDAO();
-        return dao.readKoppelMetBestellingID(bestellingID);
+    public void update(Bestelling bestelling){
+        DAO.openCurrentSessionWithTransaction();
+        DAO.update(bestelling);
+        DAO.closeCurrentSessionWithTransaction();
     }
-
-    //deze code wordtnog niet gebruikt
-    public BigDecimal getArtikelPrijs(int artikel_id){
-        ArtikelDAO dao = DAOFactory.getArtikelDAO();
-        Artikel artikel = dao.readArtikel(artikel_id);
-        BigDecimal totaal = artikel.getArtikel_prijs(); // moet nog vermenigvuldien met het aantal
-        return totaal;
-    }
-    
+   
 }

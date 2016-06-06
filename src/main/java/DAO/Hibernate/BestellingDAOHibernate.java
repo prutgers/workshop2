@@ -102,51 +102,8 @@ public class BestellingDAOHibernate implements IBestellingDAO{
         getCurrentSession().update(bestelling);
     }
 
-    public void updateBestelling(Bestelling bestelling){
-        String query =  "UPDATE Bestelling SET klant_id=? WHERE bestelling_id = ?;";
-
-        try(Connection con = new DBConnector().getConnection();){
-   
-            PreparedStatement stmt = con.prepareStatement(query);
-
-            stmt.setInt(1, bestelling.getKlantID());
-            stmt.setInt(2, bestelling.getBestellingID());
-            
-            stmt.executeUpdate();
-        }
-        catch(SQLException | ClassNotFoundException  e){
-            System.out.println("\nProbeer opnieuw.\n");
-            e.printStackTrace();
-        }
-    }
-    
-    public void updateBestellingPrijs(Bestelling bestelling){
-        String query =  "UPDATE Bestelling SET totaal_prijs = ? WHERE bestelling_id = ?;";
-
-        try(Connection con = new DBConnector().getConnection();){
-   
-            PreparedStatement stmt = con.prepareStatement(query);
-
-            stmt.setBigDecimal(1, bestelling.getTotaalPrijs());
-            stmt.setInt(2, bestelling.getBestellingID());
-            
-            stmt.executeUpdate();
-        }
-        catch(SQLException | ClassNotFoundException  e){
-            System.out.println("\nProbeer opnieuw.\n");
-            e.printStackTrace();
-        }
-    }
-    
     @Override
-    public void delete(Bestelling bestelling){
+    public void delete(Bestelling bestelling) {
         getCurrentSession().delete(bestelling);
     }
-
-    @Override
-    public void delete(int bestellingID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-
 }

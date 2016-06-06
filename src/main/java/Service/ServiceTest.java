@@ -22,7 +22,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 public class ServiceTest {
     public static void main(String[]args){
         BestellingService BServ = new BestellingService();           
-        Bestelling b = BServ.findByID(1);
+        Bestelling b = BServ.findById(1);
         
         Set<BestellingArtikel> regels = b.getBestellingArtikelSet();
         for(BestellingArtikel a : regels){
