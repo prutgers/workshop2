@@ -7,10 +7,11 @@ package Service;
 
 import DAO.Hibernate.*;
 import POJO.*;
+import java.util.ArrayList;
 
 /**
  *
- * @author Peter
+ * @author Lucas
  */
 public class KlantService {
     private static KlantDAOHibernate klantDAO;
@@ -18,16 +19,42 @@ public class KlantService {
     public KlantService(){
         klantDAO = new KlantDAOHibernate();
     }
-    //CREATE BESTELLING
+    
     public void create(Klant klant){
         klantDAO.openCurrentSessionWithTransaction();
-       klantDAO.save(klant);
+        klantDAO.save(klant);
         klantDAO.closeCurrentSessionWithTransaction();
     }
-    public Klant findById(int klantId){
+    public Klant findById(int klant_id){
         klantDAO.openCurrentSessionWithTransaction();
-        Klant klant = klantDAO.findById(klantId);
+        Klant klant = klantDAO.findById(klant_id);
         klantDAO.closeCurrentSessionWithTransaction();
         return klant;
     }
+    
+    public ArrayList<Klant> findAll(){
+        klantDAO.openCurrentSessionWithTransaction();
+        ArrayList<Klant> klantList = klantDAO.findAll();
+        klantDAO.closeCurrentSessionWithTransaction();
+        return klantList;
+    }
+    
+    public void update(Klant klant){
+        klantDAO.openCurrentSessionWithTransaction();
+        klantDAO.update(klant);
+        klantDAO.closeCurrentSessionWithTransaction();
+    }
+    
+    public void delete(int klant_id){
+        klantDAO.openCurrentSessionWithTransaction();
+        klantDAO.delete(klant_id);
+        klantDAO.closeCurrentSessionWithTransaction();
+    }
+    
+    public void delete(Klant klant){
+        klantDAO.openCurrentSessionWithTransaction();
+        klantDAO.delete(klant);
+        klantDAO.closeCurrentSessionWithTransaction();
+    }
+    
 }

@@ -34,6 +34,25 @@ public class Klant implements Serializable {
       inverseJoinColumns=@JoinColumn(name="adres_id", referencedColumnName="adres_id"))
     private Set<Adres> adresSet;
     
+    @OneToMany(mappedBy="klant", cascade = CascadeType.ALL)
+    private Set<Bestelling> bestellingSet;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Set<Bestelling> getBestellingSet() {
+        return bestellingSet;
+    }
+
+    public void setBestellingSet(Bestelling bestelling) {
+        this.bestellingSet.add(bestelling);
+    }
+    
     public Klant(){
         adresSet= new HashSet<>();
     }

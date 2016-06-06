@@ -6,6 +6,7 @@
 package DAO.Hibernate;
 
 import POJO.*;
+import java.util.ArrayList;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -19,7 +20,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
  * @author Gebruiker
  */
 public class KlantDAOHibernate {
-        
+    
     private Session currentSession;
     private Transaction currentTransaction;
 
@@ -65,15 +66,37 @@ public class KlantDAOHibernate {
         MetadataSources ms = new MetadataSources(ssrb);
         ms.addAnnotatedClass(Klant.class);
         ms.addAnnotatedClass(Adres.class);
+        ms.addAnnotatedClass(Bestelling.class);
+        ms.addAnnotatedClass(BestellingArtikel.class);
+        ms.addAnnotatedClass(Artikel.class);
         SessionFactory sf = ms.buildMetadata().buildSessionFactory();
         return sf;
     }
-    public void save(Klant klant){
+
+    public Klant save(Klant klant) {
         getCurrentSession().save(klant);
+        return klant;
     }
     
-    public Klant findById(int id){
-        Klant klant = (Klant) getCurrentSession().get(Klant.class, id);
+    public Klant findById(int klant_id){
+        Klant klant = (Klant) getCurrentSession().get(Klant.class, klant_id);
         return klant;
+    }
+
+    public ArrayList<Klant> findAll(){
+        ArrayList<Klant> klanten = (ArrayList<Klant>) getCurrentSession().createQuery("from Klant").list();
+        return klanten;
+    }
+    
+    public void update(Klant klant){
+        getCurrentSession().merge(klant);
+    }
+    
+    public void delete(Klant klant){
+        getCurrentSession().delete( findById( klant.getKlant_id() ) );
+    }
+    
+    public void delete(int klant_id){
+        getCurrentSession().delete( findById(klant_id) );
     }
 }

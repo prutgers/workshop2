@@ -22,8 +22,6 @@ public class Bestelling implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "bestelling_id")
     private int bestellingID;
-    @Column(name = "klant_id")
-    private int klantID;
     @Column(name = "totaal_prijs")
     private BigDecimal totaalPrijs;
 
@@ -33,8 +31,20 @@ public class Bestelling implements Serializable {
       joinColumns=@JoinColumn(name="bestelling_id", referencedColumnName="bestelling_id"),
       inverseJoinColumns=@JoinColumn(name="artikel_id", referencedColumnName="artikel_id"))
       */
-    private Set<BestellingArtikel> bestellingArtikelSet =new HashSet<>();;
-   
+    private Set<BestellingArtikel> bestellingArtikelSet =new HashSet<>();
+    
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="klant_id")
+    private Klant klant;
+
+    public Klant getKlant() {
+        return klant;
+    }
+
+    public void setKlant(Klant klant) {
+        this.klant = klant;
+    }
+    
     public Bestelling(){
     }
     
@@ -55,14 +65,6 @@ public class Bestelling implements Serializable {
     public void setBestellingID(int bestellingID) {
         this.bestellingID = bestellingID;
     }
-
-    public int getKlantID() {
-        return klantID;
-    }
-    
-    public void setKlantID(int klantID) {
-        this.klantID = klantID;
-    }
     
     public BigDecimal getTotaalPrijs() {
         return totaalPrijs;
@@ -74,7 +76,7 @@ public class Bestelling implements Serializable {
     
     public Bestelling(BestellingBuilder builder){
         this.bestellingID = builder.bestellingID;
-        this.klantID = builder.klantID;
+        //this.klantID = builder.klantID;
     }
     public static class BestellingBuilder{
         private int bestellingID;

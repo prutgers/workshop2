@@ -22,11 +22,11 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 public class ServiceTest {
     public static void main(String[]args){
 
-        BestellingService bserv = new BestellingService();           
-        Bestelling bestelling = bserv.findById(1);
+        //BestellingService bserv = new BestellingService();           
+        //Bestelling bestelling = bserv.findById(1);
         
 ;         
-        bserv.delete(2);
+        //bserv.delete(2);
         /*
         ArtikelService Aserv = new ArtikelService();
         Artikel artikel = Aserv.readByID(1);
@@ -44,23 +44,37 @@ public class ServiceTest {
         
         bserv.update(bestelling);
         */
-        System.exit(0);
+        //System.exit(0);
         
+        ArtikelService aserv = new ArtikelService();
+        KlantService serv = new KlantService();
+        Klant klant = serv.findById(4);
+        System.out.println(klant.getKlant_id());   
         
+        Artikel artikel = aserv.readByID(2);
         
-        /*
-        KlantService ks = new KlantService();
-        Klant k = ks.findById(21);
-        Set<Adres> list =  k.getAdresSet();
+        Bestelling bestelling = new Bestelling();
+        
+        BestellingArtikel koppel = new BestellingArtikel();
+        koppel.setAantal(2);
+        koppel.setBestelling(bestelling);
+        koppel.setArtikel(artikel);
+        
+        bestelling.setBestellingArtikelSet(koppel);
+        bestelling.setKlant(klant);
+ 
+        klant.setBestellingSet(bestelling);
+        
+        serv.update(klant);
 
-        System.out.println("ADRESLIJST");
-        for(Adres a : list){
-            System.out.println("adres: " + a.getAdres_id() + ", straat: " + a.getStraatnaam());
-        }
+
+        
+        KlantService serv = new KlantService();
+        serv.delete(4);
         
         System.exit(0);
 
-*/
+
     }
 
     
