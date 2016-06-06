@@ -21,31 +21,8 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
  */
 public class ServiceTest {
     public static void main(String[]args){
-
-        //BestellingService bserv = new BestellingService();           
-        //Bestelling bestelling = bserv.findById(1);
         
-;         
-        //bserv.delete(2);
-        /*
-        ArtikelService Aserv = new ArtikelService();
-        Artikel artikel = Aserv.readByID(1);
-        
-
-        BestellingArtikel ba = new BestellingArtikel();
-        ba.setBestelling(bestelling);
-        ba.setArtikel(artikel);
-        System.out.println("test1");       
-        System.out.println(ba.getBestelling().getBestellingID());
-        bestelling.setBestellingArtikelSet(ba);
-        System.out.println("test2"); 
-
-        System.out.println(bestelling.getBestellingID());
-        
-        bserv.update(bestelling);
-        */
-        //System.exit(0);
-        
+        //Bestelling aanmaken
         ArtikelService aserv = new ArtikelService();
         KlantService serv = new KlantService();
         Klant klant = serv.findById(4);
@@ -68,10 +45,11 @@ public class ServiceTest {
         serv.update(klant);
 
 
-        
+        //klant verwijderen
+        /*
         KlantService serv = new KlantService();
         serv.delete(4);
-        
+        */
         System.exit(0);
 
 
