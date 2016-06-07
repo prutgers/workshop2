@@ -14,47 +14,47 @@ import java.util.ArrayList;
  * @author Lucas
  */
 public class KlantService {
-    private static KlantDAOHibernate klantDAO;
+    private static KlantDAOHibernate DAO;
     
     public KlantService(){
-        klantDAO = new KlantDAOHibernate();
+        DAO = new KlantDAOHibernate();
     }
     
-    public void create(Klant klant){
-        klantDAO.openCurrentSessionWithTransaction();
-        klantDAO.save(klant);
-        klantDAO.closeCurrentSessionWithTransaction();
+    public void save(Klant klant){
+        DAO.openCurrentSessionWithTransaction();
+        DAO.save(klant);
+        DAO.closeCurrentSessionWithTransaction();
     }
-    public Klant findById(int klant_id){
-        klantDAO.openCurrentSessionWithTransaction();
-        Klant klant = klantDAO.findById(klant_id);
-        klantDAO.closeCurrentSessionWithTransaction();
+    public Klant findById(int klantId){
+        DAO.openCurrentSessionWithTransaction();
+        Klant klant = DAO.findById(klantId);
+        DAO.closeCurrentSessionWithTransaction();
         return klant;
     }
     
     public ArrayList<Klant> findAll(){
-        klantDAO.openCurrentSessionWithTransaction();
-        ArrayList<Klant> klantList = klantDAO.findAll();
-        klantDAO.closeCurrentSessionWithTransaction();
+        DAO.openCurrentSessionWithTransaction();
+        ArrayList<Klant> klantList = DAO.findAll();
+        DAO.closeCurrentSessionWithTransaction();
         return klantList;
     }
     
     public void update(Klant klant){
-        klantDAO.openCurrentSessionWithTransaction();
-        klantDAO.update(klant);
-        klantDAO.closeCurrentSessionWithTransaction();
+        DAO.openCurrentSessionWithTransaction();
+        DAO.update(klant);
+        DAO.closeCurrentSessionWithTransaction();
     }
     
-    public void delete(int klant_id){
-        klantDAO.openCurrentSessionWithTransaction();
-        klantDAO.delete(klant_id);
-        klantDAO.closeCurrentSessionWithTransaction();
+    public void delete(int klantId){
+        DAO.openCurrentSessionWithTransaction();
+        DAO.delete(klantId);
+        DAO.closeCurrentSessionWithTransaction();
     }
     
     public void delete(Klant klant){
-        klantDAO.openCurrentSessionWithTransaction();
-        klantDAO.delete(klant);
-        klantDAO.closeCurrentSessionWithTransaction();
+        DAO.openCurrentSessionWithTransaction();
+        DAO.delete(klant);
+        DAO.closeCurrentSessionWithTransaction();
     }
     
 }

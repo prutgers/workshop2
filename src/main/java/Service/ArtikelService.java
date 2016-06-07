@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 public class ArtikelService {
     
-    public void create(Artikel artikel){
+    public void save(Artikel artikel){
         ArtikelDAO dao = DAOFactory.getArtikelDAO();
         dao.createArtikel(artikel);
         
@@ -29,24 +29,24 @@ public class ArtikelService {
         dao.updateArtikel(artikel);
     }
     
-    public void delete(int artikel_id){
+    public void delete(int artikelId){
         BestellingArtikelDAO baDAO = DAOFactory.getBestellingArtikelDAO();
-        baDAO.deleteKoppelMetArtikelID(artikel_id);
+        baDAO.deleteKoppelMetArtikelID(artikelId);
         
         ArtikelDAO dao = DAOFactory.getArtikelDAO();
-        dao.deleteArtikel(artikel_id);
+        dao.deleteArtikel(artikelId);
     }
     
-    public Artikel readByID(int artikel_id){
+    public Artikel finById(int artikelId){
         //ArtikelView aView = new ArtikelView();
         //aView.readArtikelById();
         
         ArtikelDAO dao = DAOFactory.getArtikelDAO();
-        Artikel artikel = dao.readArtikel(artikel_id);
+        Artikel artikel = dao.readArtikel(artikelId);
         return artikel;
     }
     
-    public ArrayList<Artikel> readAll(){
+    public ArrayList<Artikel> findAll(){
         
         ArtikelDAO dao = DAOFactory.getArtikelDAO();
         ArrayList<Artikel> artikelLijst = dao.readArtikel();

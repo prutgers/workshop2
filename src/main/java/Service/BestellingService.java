@@ -24,7 +24,7 @@ public class BestellingService {
     //create bestelling
     public void save(Bestelling bestelling){
         DAO.openCurrentSessionWithTransaction();
-        Bestelling newBestelling = DAO.save(bestelling);
+        DAO.save(bestelling);
         DAO.closeCurrentSessionWithTransaction();
     }
 

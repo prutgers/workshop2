@@ -23,30 +23,38 @@ public class BestellingArtikelService {
         DAO = new BestellingArtikelDAOHibernate();
     }
     //create koppel
-    public void createKoppel(BestellingArtikel koppel){
+    public void save(BestellingArtikel bestellingArtikel){
         DAO.openCurrentSessionWithTransaction();
-        DAO.save(koppel);
+        DAO.save(bestellingArtikel);
         DAO.closeCurrentSessionWithTransaction();
     }
 
     //read all koppel
     public BestellingArtikel findById(int bestellingArtikelId){
-        return DAO.findById(bestellingArtikelId);
+        DAO.closeCurrentSessionWithTransaction();
+        BestellingArtikel bestellingArtikel = DAO.findById(bestellingArtikelId);
+        DAO.closeCurrentSessionWithTransaction();
+        return bestellingArtikel;
+        
     }
     
     //read by id koppel
-    public ArrayList<BestellingArtikel> findByBestellingId(int bestellingID){
-        return DAO.findByBestellingId(bestellingID);
+    public ArrayList<BestellingArtikel> findByBestellingId(int bestellingId){
+        DAO.openCurrentSession();
+        ArrayList<BestellingArtikel> BestellingArtikelList = DAO.findByBestellingId(bestellingId);
+        DAO.closeCurrentSession();
+        return BestellingArtikelList;
     }
     
     //update koppel
     public void update(BestellingArtikel koppel){
+        DAO.openCurrentSessionWithTransaction();
         DAO.update(koppel);
+        DAO.closeCurrentSessionWithTransaction();
     }    
     //delete
     public void delete(int bestellingArtikelID){
         DAO.openCurrentSessionWithTransaction();
-        BestellingArtikelDAO dao = DAOFactory.getBestellingArtikelDAO();
         DAO.delete(bestellingArtikelID);
         DAO.closeCurrentSessionWithTransaction();
     }

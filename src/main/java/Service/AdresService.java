@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class AdresService {
     
-    public Adres create(Adres adres) {
+    public Adres save(Adres adres) {
         AdresDAO aDAO = DAOFactory.getAdresDAO();
         Adres nieuwAdres = aDAO.createAdres(adres);
         return nieuwAdres;
@@ -24,19 +24,19 @@ public class AdresService {
         aDAO.updateAdres(adres);
     }
     
-    public ArrayList<Adres> readAdres() {
+    public ArrayList<Adres> findAll() {
         AdresDAO aDAO = DAOFactory.getAdresDAO();
         ArrayList<Adres> adresGegevens = aDAO.readAdres();
         return adresGegevens;
     }
     
-    public Adres readByID(int adresID) {
+    public Adres findByIf(int adresId) {
         AdresDAO aDAO = DAOFactory.getAdresDAO();
-        return aDAO.readAdresByID(adresID);
+        return aDAO.readAdresByID(adresId);
     }
     
-    public void delete (int adres_id) {
+    public void delete (int adresId) {
         AdresDAO aDAO = DAOFactory.getAdresDAO();
-        aDAO.deleteAdres(adres_id);
+        aDAO.deleteAdres(adresId);
     }
 }
