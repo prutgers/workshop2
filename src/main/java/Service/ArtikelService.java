@@ -5,7 +5,6 @@
  */
 package Service;
 
-import DAOFactory.DAOFactory;
 import POJO.Artikel;
 import View.ArtikelView;
 import interfaceDAO.ArtikelDAO;

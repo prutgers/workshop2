@@ -5,10 +5,8 @@
  */
 package DAO.Hibernate;
 
-import ConnectionPools.DBConnector;
 import POJO.*;
 import interfaceDAO.IBestellingDAO;
-import java.sql.*;
 import java.util.ArrayList;
 import org.hibernate.*;
 import org.hibernate.boot.MetadataSources;

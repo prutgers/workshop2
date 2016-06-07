@@ -44,9 +44,9 @@ public class BestellingService {
     }
     
     //read bestelling by klantId
-    public ArrayList<Bestelling> readByKlantID(int klantID){
+    public ArrayList<Bestelling> findByKlantId(int klantId){
         DAO.openCurrentSessionWithTransaction();
-        ArrayList<Bestelling> bestellingen = DAO.findByKlantId(klantID);
+        ArrayList<Bestelling> bestellingen = DAO.findByKlantId(klantId);
         DAO.closeCurrentSessionWithTransaction();
         return bestellingen;
     }

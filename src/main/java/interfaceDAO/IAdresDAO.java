@@ -10,15 +10,15 @@ import java.util.ArrayList;
 
 public interface IAdresDAO {
 
-    Adres create(Adres adres);
+    Adres save(Adres adres);
     
-    ArrayList<Adres> readAll();
+    ArrayList<Adres> findAll();
     
-    Adres readByID(int adresID);
+    Adres findById(int adresId);
         
     void update(Adres adres);
     
-    void delete(int adresID);
+    void delete(int adresId);
     
     void delete(Adres adres);
 }

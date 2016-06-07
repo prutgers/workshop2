@@ -1,6 +1,6 @@
 package Service;
 
-import DAOFactory.DAOFactory;
+import DAO.Hibernate.*;
 import POJO.Adres;
 import interfaceDAO.AdresDAO;
 import java.util.ArrayList;
@@ -13,30 +13,41 @@ import java.util.ArrayList;
 
 public class AdresService {
     
+    private static AdresDAOHibernate DAO;
+    
+    public AdresService(){
+        DAO = new AdresDAOHibernate();
+    }
+    
     public Adres save(Adres adres) {
-        AdresDAO aDAO = DAOFactory.getAdresDAO();
-        Adres nieuwAdres = aDAO.createAdres(adres);
+        DAO.openCurrentSessionWithTransaction();
+        Adres nieuwAdres = DAO.save(adres);
         return nieuwAdres;
     }
     
     public void update(Adres adres) {
-        AdresDAO aDAO = DAOFactory.getAdresDAO();
-        aDAO.updateAdres(adres);
+        DAO.openCurrentSessionWithTransaction();
+        DAO.update(adres);
+        DAO.closeCurrentSessionWithTransaction();
     }
     
     public ArrayList<Adres> findAll() {
-        AdresDAO aDAO = DAOFactory.getAdresDAO();
-        ArrayList<Adres> adresGegevens = aDAO.readAdres();
+        DAO.openCurrentSession();
+        ArrayList<Adres> adresGegevens = DAO.findAll();
+        DAO.closeCurrentSession();
         return adresGegevens;
     }
     
-    public Adres findByIf(int adresId) {
-        AdresDAO aDAO = DAOFactory.getAdresDAO();
-        return aDAO.readAdresByID(adresId);
+    public Adres findById(int adresId) {
+        DAO.openCurrentSession();
+        Adres adres= DAO.findById(adresId);
+        DAO.closeCurrentSession();
+        return adres;
     }
     
     public void delete (int adresId) {
-        AdresDAO aDAO = DAOFactory.getAdresDAO();
-        aDAO.deleteAdres(adresId);
+        DAO.openCurrentSessionWithTransaction();
+        DAO.delete(adresId);
+        DAO.closeCurrentSessionWithTransaction();
     }
 }

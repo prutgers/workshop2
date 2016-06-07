@@ -5,11 +5,8 @@
  */
 package Service;
 
-import DAO.Hibernate.BestellingArtikelDAOHibernate;
-import DAO.Hibernate.BestellingDAOHibernate;
-import DAOFactory.DAOFactory;
+import DAO.Hibernate.*;
 import POJO.BestellingArtikel;
-import interfaceDAO.BestellingArtikelDAO;
 import java.util.ArrayList;
 
 /**

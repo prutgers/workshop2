@@ -64,23 +64,20 @@ public class AdresDAOHibernate implements IAdresDAO {
         return sessionFactory;
     }
    
-    @Override
-    public Adres create(Adres adres) {
+    public Adres save(Adres adres) {
         getCurrentSession().save(adres);
         return adres;
     }
 
-    @Override
     @SuppressWarnings("unchecked")
-    public ArrayList<Adres> readAll() {
+    public ArrayList<Adres> findAll() {
         ArrayList<Adres> adresGegevens = (ArrayList<Adres>)getCurrentSession()
                 .createQuery("from Adres").list();
         return adresGegevens;
     }
 
-    @Override
-    public Adres readByID(int adresID) {
-        Adres adres = (Adres)getCurrentSession().get(Adres.class, adresID);
+    public Adres findById(int adresId) {
+        Adres adres = (Adres)getCurrentSession().get(Adres.class, adresId);
         return adres;
     }
 
@@ -95,8 +92,8 @@ public class AdresDAOHibernate implements IAdresDAO {
     }
 
     @Override
-    public void delete(int adresID) {
-        Adres adres = (Adres)getCurrentSession().get(Adres.class, adresID);
+    public void delete(int adresId) {
+        Adres adres = (Adres)getCurrentSession().get(Adres.class, adresId);
         getCurrentSession().delete(adres); 
     }
 }
