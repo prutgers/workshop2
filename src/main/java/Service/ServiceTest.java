@@ -22,7 +22,26 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 public class ServiceTest {
     public static void main(String[]args){
         
+        /*
+        KlantService serv = new KlantService();
+        Klant klant = serv.findById(8);
+        System.out.println(klant.getKlant_id());
+        
+        
+        AdresService as = new AdresService();
+        Adres adres = as.readByID(1);
+        System.out.println(adres.getAdres_id());
+        klant.setAdresSet(adres);
+        
+        serv.update(klant);
+        */
+        
+        KlantService serv = new KlantService();
+        serv.delete(7);
+        
+        
         //Bestelling aanmaken
+        /*
         ArtikelService aserv = new ArtikelService();
         KlantService serv = new KlantService();
         Klant klant = serv.findById(4);
@@ -44,6 +63,7 @@ public class ServiceTest {
         
         serv.update(klant);
 
+        */
 
         //klant verwijderen
         /*

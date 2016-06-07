@@ -28,19 +28,6 @@ public class BestellingService {
         DAO.closeCurrentSessionWithTransaction();
     }
 
-        //delete koppel
-    public void delete(int bestellingId){
-        Bestelling bestelling = findById(bestellingId);
-        DAO.openCurrentSessionWithTransaction();
-        DAO.delete(bestelling); 
-        DAO.closeCurrentSessionWithTransaction();
-    }
-    public void delete(Bestelling bestelling){
-        DAO.openCurrentSessionWithTransaction();
-        DAO.delete(bestelling); 
-        DAO.closeCurrentSessionWithTransaction();
-    }
-
     //read all bestelling
     public ArrayList<Bestelling>findAll(){
         DAO.openCurrentSession();
@@ -69,5 +56,16 @@ public class BestellingService {
         DAO.update(bestelling);
         DAO.closeCurrentSessionWithTransaction();
     }
-   
+    //delete 
+    public void delete(int bestellingId){
+        Bestelling bestelling = findById(bestellingId);
+        DAO.openCurrentSessionWithTransaction();
+        DAO.delete(bestelling); 
+        DAO.closeCurrentSessionWithTransaction();
+    }
+    public void delete(Bestelling bestelling){
+        DAO.openCurrentSessionWithTransaction();
+        DAO.delete(bestelling); 
+        DAO.closeCurrentSessionWithTransaction();
+    }
 }

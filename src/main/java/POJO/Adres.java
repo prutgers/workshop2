@@ -11,13 +11,13 @@ import javax.persistence.*;
  */
 
 import java.io.Serializable;
-import javax.persistence.*;
      
 @Entity
-@Table(name = "adres")
+@Table(name="adres")
 public class Adres implements Serializable {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "adres_id")
+    @Id 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="adres_id")
      private int adres_id;          //required
     @Column(name="straatnaam")
      private String straatnaam;     //required
@@ -29,8 +29,7 @@ public class Adres implements Serializable {
      private String postcode;       //required
     @Column(name="woonplaats")
      private String woonplaats;     //required
-
-
+    
     public String getStraatnaam() {
         return straatnaam;
     }

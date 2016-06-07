@@ -34,7 +34,7 @@ public class BestellingArtikelService {
         return DAO.findById(bestellingArtikelId);
     }
     
-    //read all koppel
+    //read by id koppel
     public ArrayList<BestellingArtikel> findByBestellingId(int bestellingID){
         return DAO.findByBestellingId(bestellingID);
     }
@@ -43,7 +43,7 @@ public class BestellingArtikelService {
     public void update(BestellingArtikel koppel){
         DAO.update(koppel);
     }    
-    
+    //delete
     public void delete(int bestellingArtikelID){
         DAO.openCurrentSessionWithTransaction();
         BestellingArtikelDAO dao = DAOFactory.getBestellingArtikelDAO();

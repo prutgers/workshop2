@@ -5,10 +5,13 @@
  */
 package POJO;
 
-import java.sql.*;
-import java.util.*;
 import java.io.Serializable;
+import java.util.Set;
+import java.util.HashSet;
+
 import javax.persistence.*;
+
+
 /**
  *
  * @author lucas
@@ -16,95 +19,55 @@ import javax.persistence.*;
 @Entity
 @Table(name = "klant")
 public class Klant implements Serializable {
-
+    
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "klant_id")
-    private int id;
-    @Column(name="voornaam")
+    private int klant_id;
+    @Column(name = "voornaam")
     private String voornaam;
-    @Column(name="achternaam")
+    @Column(name = "achternaam")
     private String achternaam;
-    @Column(name="tussenvoegsel")
+    @Column(name = "tussenvoegsel")
     private String tussenvoegsel;
-    @Column(name="email")
+    @Column(name = "email")
     private String email;
-    @ManyToMany
+    
+    @ManyToMany//(cascade=CascadeType.ALL)
     @JoinTable(name="koppelklantadres",
-      joinColumns=@JoinColumn(name="klant_id", referencedColumnName="klant_id"),
-      inverseJoinColumns=@JoinColumn(name="adres_id", referencedColumnName="adres_id"))
-    private Set<Adres> adresSet;
+      joinColumns=@JoinColumn(name="klant_id"),
+      inverseJoinColumns=@JoinColumn(name="adres_id"))
+    private Set<Adres> adresSet = new HashSet();
+    
+    @OneToMany(mappedBy = "klant", cascade=CascadeType.ALL)
+    private Set<Account> accountSet = new HashSet();
+    
     
     @OneToMany(mappedBy="klant", cascade = CascadeType.ALL)
-    private Set<Bestelling> bestellingSet;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Set<Bestelling> getBestellingSet() {
-        return bestellingSet;
-    }
-
-    public void setBestellingSet(Bestelling bestelling) {
-        this.bestellingSet.add(bestelling);
-    }
+    private Set<Bestelling> bestellingSet = new HashSet();
     
-    public Klant(){
-        adresSet= new HashSet<>();
-    }
     
-    public Set<Adres> getAdresSet() {
-        return adresSet;
-    }
-
-    public void setAdresSet(Adres adres) {
-        this.adresSet.add(adres);
-    }
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "factuur")
+//    private Set<Factuur> factuurSet = new HashSet<Factuur>(0);
     
-    public Klant(int klant_id){
-        this.id = klant_id;
-        Scanner input = new Scanner(System.in);
-        System.out.println("Create a new Klant!");
-        System.out.print("Your first name :");
-        voornaam = input.next();
-        System.out.print("Your last name :");
-        achternaam = input.next();
-        System.out.print("Additieves :");
-        tussenvoegsel = input.next();
-        System.out.print("Your email adress :");
-        email = input.next();
-    }
     
-    public Klant(ResultSet klantData) throws SQLException{
-        klantData.next();
-        id = klantData.getInt(1);
-        voornaam = klantData.getString(2);
-        achternaam = klantData.getString(3);
-        tussenvoegsel = klantData.getString(4);
-        email = klantData.getString(5);
-    }
     
-    public String toString(){
-        return "" + getKlant_id() + ", " + getVoornaam() + ", " + getAchternaam() + ", "
-                + getTussenvoegsel() + ", " + getEmail();
-    }
+//    public String toString(){
+//        return "" + getKlant_id() + ", " + getVoornaam() + ", " + getAchternaam() + ", "
+//                + getTussenvoegsel() + ", " + getEmail();
+//    }
 
     /**
      * @return the klant_id
      */
     public int getKlant_id() {
-        return id;
+        return klant_id;
     }
 
     /**
      * @param klant_id the klant_id to set
      */
     public void setKlant_id(int klant_id) {
-        this.id = klant_id;
+        this.klant_id = klant_id;
     }
 
     /**
@@ -161,5 +124,61 @@ public class Klant implements Serializable {
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * @return the bestellingSet
+     */
+    public Set<Bestelling> getBestellingSet() {
+        return bestellingSet;
+    }
+
+    /**
+     * @param bestellingSet the bestellingSet to set
+     */
+    public void setBestellingSet(Set<Bestelling> bestellingSet) {
+        this.bestellingSet = bestellingSet;
+    }
+//
+//    /**
+//     * @return the factuurSet
+//     */
+//    public Set<Factuur> getFactuurSet() {
+//        return factuurSet;
+//    }
+//
+//    /**
+//     * @param factuurSet the factuurSet to set
+//     */
+//    public void setFactuurSet(Set<Factuur> factuurSet) {
+//        this.factuurSet = factuurSet;
+//    }
+
+    /**
+     * @return the accountSet
+     */
+    public Set<Account> getAccountSet() {
+        return accountSet;
+    }
+
+    /**
+     * @param accountSet the accountSet to set
+     */
+    public void setAccountSet(Set<Account> accountSet) {
+        this.accountSet = accountSet;
+    }
+
+    /**
+     * @return the adresSet
+     */
+    public Set<Adres> getAdresSet() {
+        return adresSet;
+    }
+
+    /**
+     * @param adresSet the adresSet to set
+     */
+    public void setAdresSet(Set<Adres> adresSet) {
+        this.adresSet = adresSet;
     }
 }

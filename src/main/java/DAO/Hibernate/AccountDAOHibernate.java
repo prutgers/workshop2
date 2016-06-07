@@ -5,7 +5,9 @@
  */
 package DAO.Hibernate;
 
-import POJO.*;
+import POJO.Account;
+import POJO.Klant;
+import POJO.Adres;
 import java.util.ArrayList;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -19,7 +21,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
  *
  * @author Gebruiker
  */
-public class KlantDAOHibernate {
+public class AccountDAOHibernate {
     
     private Session currentSession;
     private Transaction currentTransaction;
@@ -67,37 +69,30 @@ public class KlantDAOHibernate {
         ms.addAnnotatedClass(Klant.class);
         ms.addAnnotatedClass(Adres.class);
         ms.addAnnotatedClass(Account.class);
-        ms.addAnnotatedClass(Bestelling.class);
-        ms.addAnnotatedClass(BestellingArtikel.class);
-        ms.addAnnotatedClass(Artikel.class);
         SessionFactory sf = ms.buildMetadata().buildSessionFactory();
         return sf;
     }
 
-    public Klant save(Klant klant) {
-        getCurrentSession().save(klant);
-        return klant;
+    public Account save (Account account) {
+        getCurrentSession().save(account);
+        return account;
     }
     
-    public Klant findById(int klant_id){
-        Klant klant = (Klant) getCurrentSession().get(Klant.class, klant_id);
-        return klant;
+    public Account findById(int account_id){
+        Account account = (Account) getCurrentSession().get(Account.class, account_id);
+        return account;
     }
 
-    public ArrayList<Klant> findAll(){
-        ArrayList<Klant> klanten = (ArrayList<Klant>) getCurrentSession().createQuery("from Klant").list();
-        return klanten;
+    public ArrayList<Account> findAll(){
+        ArrayList<Account> accounten = (ArrayList<Account>) getCurrentSession().createQuery("from Account").list();
+        return accounten;
     }
     
-    public void update(Klant klant){
-        getCurrentSession().merge(klant);
+    public void update(Account account){
+        getCurrentSession().update(account);
     }
     
-    public void delete(Klant klant){
-        getCurrentSession().delete( findById( klant.getKlant_id() ) );
-    }
-    
-    public void delete(int klant_id){
-        getCurrentSession().delete( findById(klant_id) );
+    public void delete(Account account){
+        getCurrentSession().delete(account);
     }
 }
