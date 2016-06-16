@@ -31,8 +31,6 @@ public class Artikel {
    public Artikel(){
     }
    
-   //vraag aan herman hoe het zit met de onetoMany
-   
    
     /**
      * @return the artikel_ID
