@@ -11,7 +11,6 @@ package Controller;
  */
 import POJO.KlantAdres;
 import interfaceDAO.KlantAdresDAO;
-import DAOFactory.DAOFactory;
 import View.KlantAdresKeuzeView;
 import View.KlantAdresView;
 import View.AdresView;

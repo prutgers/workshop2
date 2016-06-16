@@ -5,16 +5,9 @@
  */
 package Controller;
 
-import DAOFactory.DAOFactory;
-import DAO.MySQL.BestellingDAOMySQL;
 import POJO.*;
-import Controller.*;
 import Service.*;
 import View.*;
-import interfaceDAO.*;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Set;
 
 
 /**
@@ -23,7 +16,13 @@ import java.util.Set;
  */
 public class BestellingController {
     public static BestellingView view = new BestellingView();
-    public static BestellingService BS = new BestellingService();
+    
+    public static BestellingService bestellingService;
+    
+    public BestellingController(BestellingService bestellingService){
+        bestellingService = bestellingService;
+    }
+    
     
     public static void startKeuze(){
         BestellingKeuzeView keuzeView = new BestellingKeuzeView();
@@ -93,16 +92,16 @@ public class BestellingController {
         koppel.setBestelling(bestelling);
         
         bestelling.setBestellingArtikelSet(koppel);
-        BS.save(bestelling);
+        bestellingService.save(bestelling);
     }
 
     public static void update(){
         view.addArtikel();
         //haal bestelling op
-        Bestelling bestelling = BS.findById(view.getBestellingId());
+        Bestelling bestelling = bestellingService.findById(view.getBestellingId());
         
         //haal artikel op
-        Artikel artikel = new ArtikelService().readByID(view.getArtikelId());
+        Artikel artikel = new ArtikelService().findById(view.getArtikelId());
         
         //maak nieuw koppel aan
         BestellingArtikel bestellingArtikel = new BestellingArtikel();
@@ -113,32 +112,32 @@ public class BestellingController {
         //voeg nieuw koppel toe
         bestelling.setBestellingArtikelSet(bestellingArtikel);
         
-        BS.update(bestelling);
+        bestellingService.update(bestelling);
     }
 
     public static void readAll(){
-        view.printBestellingen(BS.readAll());
+        view.printBestellingen(bestellingService.findAll());
     }
     
     public static void readByID(){
         view.readBestellingID();
-        view.print(BS.findById(view.getBestellingId()));
+        view.print(bestellingService.findById(view.getBestellingId()));
     }
     
     public static void readByKlantID(){
         view.readKlantID();
-        view.printBestellingen(BS.readByKlantID(view.getKlantId()));
+        view.printBestellingen(bestellingService.findByKlantId(view.getKlantId()));
     }
     
     public static void readArtikelen(){
         view.readKlantID();
         //haal bestelling op
-        Bestelling bestelling = BS.findById(view.getBestellingId());
+        Bestelling bestelling = bestellingService.findById(view.getBestellingId());
         view.printArtikelen(bestelling.getBestellingArtikelSet());
     }
 
     public static void delete(){
         view.readBestellingID();
-        BS.delete(view.getBestellingId());
+        bestellingService.delete(view.getBestellingId());
     }
 }

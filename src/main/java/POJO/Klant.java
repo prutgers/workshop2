@@ -139,6 +139,9 @@ public class Klant implements Serializable {
     public void setBestellingSet(Set<Bestelling> bestellingSet) {
         this.bestellingSet = bestellingSet;
     }
+    public void setBestellingSet(Bestelling bestelling) {
+        this.bestellingSet.add(bestelling);
+    }
 //
 //    /**
 //     * @return the factuurSet

@@ -22,7 +22,7 @@ public class BestellingArtikelController {
         view.readUpdate();
         
         //haal artikel op
-        Artikel artikel = new ArtikelService().readByID(view.getArtikelID());
+        Artikel artikel = new ArtikelService().findById(view.getArtikelID());
 
         //haal bestelling op
         Bestelling bestelling = new BestellingService().findById(view.getBestellingID());
@@ -32,7 +32,7 @@ public class BestellingArtikelController {
         koppel.setArtikel(artikel);
         koppel.setAantal(view.getAantal());
 
-        BS.createKoppel(koppel);
+        BS.save(koppel);
     }
 
     public static void read(){

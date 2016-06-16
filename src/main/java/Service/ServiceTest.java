@@ -5,7 +5,6 @@
  */
 package Service;
 
-import DAO.MySQL.*;
 import POJO.*;
 import java.math.BigDecimal;
 import java.util.*;
@@ -36,25 +35,26 @@ public class ServiceTest {
         serv.update(klant);
         */
         
+        /*
         KlantService serv = new KlantService();
         serv.delete(7);
-        
+        */
         
         //Bestelling aanmaken
-        /*
-        ArtikelService aserv = new ArtikelService();
+        
+        //ArtikelService aserv = new ArtikelService();
         KlantService serv = new KlantService();
         Klant klant = serv.findById(4);
         System.out.println(klant.getKlant_id());   
         
-        Artikel artikel = aserv.readByID(2);
+        //Artikel artikel = aserv.findById(2);
         
         Bestelling bestelling = new Bestelling();
         
         BestellingArtikel koppel = new BestellingArtikel();
         koppel.setAantal(2);
         koppel.setBestelling(bestelling);
-        koppel.setArtikel(artikel);
+        //koppel.setArtikel(artikel);
         
         bestelling.setBestellingArtikelSet(koppel);
         bestelling.setKlant(klant);
@@ -63,7 +63,7 @@ public class ServiceTest {
         
         serv.update(klant);
 
-        */
+        
 
         //klant verwijderen
         /*

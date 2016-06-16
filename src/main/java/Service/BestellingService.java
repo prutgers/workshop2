@@ -17,8 +17,8 @@ import java.util.ArrayList;
 public class BestellingService {
     private static BestellingDAOHibernate DAO;
     
-    public BestellingService(){
-        DAO = new BestellingDAOHibernate();
+    public BestellingService(BestellingDAOHibernate bestellingDAOHibernate){
+        DAO = bestellingDAOHibernate;
     }
     
     //create bestelling

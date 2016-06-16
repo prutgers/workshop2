@@ -16,7 +16,6 @@ package Controller;
 import View.KlantView;
 import View.KlantKeuzeView;
 import View.AdresView;
-import DAO.MySQL.KlantDAOMySQL;
 import POJO.Klant;
 import POJO.Adres;
 import POJO.KlantAdres;
@@ -24,7 +23,6 @@ import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExceptio
 import interfaceDAO.KlantDAO;
 import interfaceDAO.AdresDAO;
 import interfaceDAO.KlantAdresDAO;
-import DAOFactory.DAOFactory;
 
 
 public class KlantController {
