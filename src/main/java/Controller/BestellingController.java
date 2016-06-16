@@ -27,9 +27,16 @@ public class BestellingController {
         this.bestellingService = bestellingService;
     }
     */
-
-
-    public static void startKeuze(){
+    
+    public BestellingService bestellingService;
+    
+    public BestellingController(){
+        ApplicationContext context = new AnnotationConfigApplicationContext(BestellingConfig.class);
+        BestellingService bestellingService = context.getBean(BestellingService.class);
+        this.bestellingService = bestellingService;
+    }
+            
+    public void startKeuze(){
         
         BestellingKeuzeView keuzeView = new BestellingKeuzeView();
         keuzeView.keuzeView();
@@ -77,12 +84,7 @@ public class BestellingController {
         }
         
     }
-    public static void create(){
-        
-        ApplicationContext context = new AnnotationConfigApplicationContext(BestellingConfig.class);
-        BestellingService bestellingService = context.getBean(BestellingService.class);
-    
-        
+    public  void create(){
         //maak een nieuwe bestellingview waarin je vraagt voor welke klant
         //de bestelling is
         view.readKlantID();
@@ -109,7 +111,7 @@ public class BestellingController {
         bestellingService.save(bestelling);
     }
 
-    public static void update(){
+    public  void update(){
         view.addArtikel();
         //haal bestelling op
         Bestelling bestelling = bestellingService.findById(view.getBestellingId());
@@ -129,28 +131,28 @@ public class BestellingController {
         bestellingService.update(bestelling);
     }
 
-    public static void readAll(){
+    public  void readAll(){
         view.printBestellingen(bestellingService.findAll());
     }
     
-    public static void readByID(){
+    public  void readByID(){
         view.readBestellingID();
         view.print(bestellingService.findById(view.getBestellingId()));
     }
     
-    public static void readByKlantID(){
+    public  void readByKlantID(){
         view.readKlantID();
         view.printBestellingen(bestellingService.findByKlantId(view.getKlantId()));
     }
     
-    public static void readArtikelen(){
+    public  void readArtikelen(){
         view.readKlantID();
         //haal bestelling op
         Bestelling bestelling = bestellingService.findById(view.getBestellingId());
         view.printArtikelen(bestelling.getBestellingArtikelSet());
     }
 
-    public static void delete(){
+    public  void delete(){
         view.readBestellingID();
         bestellingService.delete(view.getBestellingId());
     }

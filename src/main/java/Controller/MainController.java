@@ -13,7 +13,6 @@ import View.MainView;
  */
 public class MainController {
     public static void main(String[] args) {
-       
         hoofdMenu();
     }
     
@@ -25,7 +24,7 @@ public class MainController {
                 KlantController.startKeuze();
                 break;
             case 2:
-                BestellingController.startKeuze();
+                new BestellingController().startKeuze();
                 break;
             case 3:
                 ArtikelController.startKeuze();

@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 package Config;
-import Controller.BestellingController;
 import DAO.Hibernate.BestellingDAOHibernate;
 import Service.BestellingService;
+import interfaceDAO.IBestellingDAO;
 import org.springframework.context.annotation.*;
 /**
  *
@@ -15,12 +15,12 @@ import org.springframework.context.annotation.*;
 @Configuration
 public class BestellingConfig {
     @Bean 
-    public BestellingDAOHibernate bestellingDAO(){
+    public IBestellingDAO bestellingDAO(){
         return new BestellingDAOHibernate();
     }
     @Bean
-    public BestellingService bestellingService(BestellingDAOHibernate bestellingDAOHibernate){
-        return new BestellingService(bestellingDAOHibernate);
+    public BestellingService bestellingService(IBestellingDAO bestellingDAO){
+        return new BestellingService(bestellingDAO);
     }
     /*
     @Bean

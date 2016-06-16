@@ -67,44 +67,56 @@ public class BestellingDAOHibernate implements IBestellingDAO{
         ms.addAnnotatedClass(BestellingArtikel.class);
         ms.addAnnotatedClass(Artikel.class);
         ms.addAnnotatedClass(Klant.class);
-        ms.addAnnotatedClass(Adres.class);
         ms.addAnnotatedClass(Account.class);
+        ms.addAnnotatedClass(Adres.class);
         SessionFactory sf = ms.buildMetadata().buildSessionFactory();
         return sf;
     }
 
     @Override
     public Bestelling save (Bestelling bestelling) {
+        openCurrentSession();
         getCurrentSession().save(bestelling);
+        closeCurrentSession();
         return bestelling;
     }
     
     @Override
     public Bestelling findById(int BestellingId){
+        openCurrentSession();
         Bestelling bestelling = (Bestelling) getCurrentSession().get(Bestelling.class, BestellingId);
+        closeCurrentSession();
         return bestelling;
     }
 
     @Override
     public ArrayList<Bestelling> findAll(){
+        openCurrentSession();
         ArrayList<Bestelling> bestellingen = (ArrayList<Bestelling>) getCurrentSession().createQuery("from bestelling").list();
+        closeCurrentSession();
         return bestellingen;
     }
     @Override
     public ArrayList<Bestelling> findByKlantId(int klantId){
+        openCurrentSessionWithTransaction();
         Query query = getCurrentSession().createQuery("from Bestelling where id = :klantId");
         query.setParameter("klantId", klantId);
         ArrayList<Bestelling> bestellingen = (ArrayList<Bestelling>) query.list();
+        closeCurrentSessionWithTransaction();
         return bestellingen;
     }
     
     @Override
     public void update(Bestelling bestelling){
+        openCurrentSessionWithTransaction();
         getCurrentSession().update(bestelling);
+        closeCurrentSessionWithTransaction();
     }
 
     @Override
     public void delete(Bestelling bestelling) {
+        openCurrentSessionWithTransaction();
         getCurrentSession().delete(bestelling);
+        closeCurrentSessionWithTransaction();
     }
 }
