@@ -5,6 +5,7 @@
  */
 package Service;
 
+import DAO.Hibernate.ArtikelDAOHibernate;
 import POJO.Artikel;
 import View.ArtikelView;
 import interfaceDAO.ArtikelDAO;
@@ -17,38 +18,45 @@ import java.util.ArrayList;
  */
 public class ArtikelService {
     
+    private static ArtikelDAOHibernate DAO;
+    
+    public ArtikelService(){
+        DAO = new ArtikelDAOHibernate();
+    }
+    
+    
+    
     public void save(Artikel artikel){
-        ArtikelDAO dao = DAOFactory.getArtikelDAO();
-        dao.createArtikel(artikel);
+        DAO.openCurrentSessionWithTransaction();
+        DAO.save(artikel);
+        DAO.closeCurrentSessionWithTransaction();
         
     }
     
     public void update(Artikel artikel){
-        ArtikelDAO dao = DAOFactory.getArtikelDAO();
-        dao.updateArtikel(artikel);
+        DAO.openCurrentSessionWithTransaction();
+        DAO.update(artikel);
+        DAO.closeCurrentSessionWithTransaction();
     }
     
     public void delete(int artikelId){
-        BestellingArtikelDAO baDAO = DAOFactory.getBestellingArtikelDAO();
-        baDAO.deleteKoppelMetArtikelID(artikelId);
-        
-        ArtikelDAO dao = DAOFactory.getArtikelDAO();
-        dao.deleteArtikel(artikelId);
+        Artikel artikel = DAO.findById(artikelId);
+        DAO.openCurrentSessionWithTransaction();
+        DAO.delete(artikel); 
+        DAO.closeCurrentSessionWithTransaction();
     }
     
     public Artikel finById(int artikelId){
-        //ArtikelView aView = new ArtikelView();
-        //aView.readArtikelById();
-        
-        ArtikelDAO dao = DAOFactory.getArtikelDAO();
-        Artikel artikel = dao.readArtikel(artikelId);
+        DAO.openCurrentSession();
+        Artikel artikel = DAO.findById(artikelID);
+        DAO.closeCurrentSession();
         return artikel;
     }
     
     public ArrayList<Artikel> findAll(){
-        
-        ArtikelDAO dao = DAOFactory.getArtikelDAO();
-        ArrayList<Artikel> artikelLijst = dao.readArtikel();
+        DAO.openCurrentSessionWithTransactoin();
+        ArrayList<Artikel> artikelLijst = DAO.findAll();
+        DAO.closeCurrentSessionWithTransaction();
         return artikelLijst;
     }
     
