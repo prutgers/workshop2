@@ -48,13 +48,13 @@ public class ArtikelService {
     
     public Artikel finById(int artikelId){
         DAO.openCurrentSession();
-        Artikel artikel = DAO.findById(artikelID);
+        Artikel artikel = DAO.findById(artikelId);
         DAO.closeCurrentSession();
         return artikel;
     }
     
     public ArrayList<Artikel> findAll(){
-        DAO.openCurrentSessionWithTransactoin();
+        DAO.openCurrentSessionWithTransaction();
         ArrayList<Artikel> artikelLijst = DAO.findAll();
         DAO.closeCurrentSessionWithTransaction();
         return artikelLijst;
