@@ -6,7 +6,6 @@
 package DAO.Hibernate;
 
 import POJO.Artikel;
-import interfaceDAO.ArtikelDAO;
 import java.util.ArrayList;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -14,12 +13,13 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import interfaceDAO.IArtikelDAO;
 
 /**
  *
  * @author Peter
  */
-public class ArtikelDAOHibernate implements ArtikelDAO {
+public class ArtikelDAOHibernate implements IArtikelDAO {
      private Session currentSession;
     private Transaction currentTransaction;
 

@@ -8,9 +8,9 @@ package Service;
 import DAO.Hibernate.ArtikelDAOHibernate;
 import POJO.Artikel;
 import View.ArtikelView;
-import interfaceDAO.ArtikelDAO;
 import interfaceDAO.BestellingArtikelDAO;
 import java.util.ArrayList;
+import interfaceDAO.IArtikelDAO;
 
 /**
  *

@@ -12,14 +12,14 @@ import java.util.ArrayList;
  *
  * @author Peter
  */
-public interface ArtikelDAO {
-    Artikel createArtikel(Artikel artikel);
+public interface IArtikelDAO {
+    Artikel save(Artikel artikel);
     
-    Artikel readArtikel(int artikel_id);
+    Artikel findById(int artikel_id);
 
-    ArrayList<Artikel> readArtikel();
+    ArrayList<Artikel> findAll();
     
-    void deleteArtikel(int artikel_id);
+    void delete(Artikel artikel);
 
-    void updateArtikel(Artikel artikel);
+    void update(Artikel artikel);
 }
