@@ -66,6 +66,9 @@ public class BestellingDAOHibernate implements IBestellingDAO{
         ms.addAnnotatedClass(Bestelling.class);
         ms.addAnnotatedClass(BestellingArtikel.class);
         ms.addAnnotatedClass(Artikel.class);
+        ms.addAnnotatedClass(Klant.class);
+        ms.addAnnotatedClass(Adres.class);
+        ms.addAnnotatedClass(Account.class);
         SessionFactory sf = ms.buildMetadata().buildSessionFactory();
         return sf;
     }

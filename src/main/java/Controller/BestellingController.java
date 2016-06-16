@@ -5,26 +5,32 @@
  */
 package Controller;
 
+import Config.BestellingConfig;
 import POJO.*;
 import Service.*;
 import View.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 
 /**
  *
  * @author Gebruiker
  */
+
 public class BestellingController {
     public static BestellingView view = new BestellingView();
-    
+    /*
     public static BestellingService bestellingService;
     
     public BestellingController(BestellingService bestellingService){
-        bestellingService = bestellingService;
+        this.bestellingService = bestellingService;
     }
-    
-    
+    */
+
+
     public static void startKeuze(){
+        
         BestellingKeuzeView keuzeView = new BestellingKeuzeView();
         keuzeView.keuzeView();
         
@@ -73,17 +79,23 @@ public class BestellingController {
     }
     public static void create(){
         
+        ApplicationContext context = new AnnotationConfigApplicationContext(BestellingConfig.class);
+        BestellingService bestellingService = context.getBean(BestellingService.class);
+    
+        
         //maak een nieuwe bestellingview waarin je vraagt voor welke klant
         //de bestelling is
         view.readKlantID();
+        Klant klant = new KlantService().findById(view.getKlantId());
         
         //Nieuwe Bestelling
         Bestelling bestelling = new Bestelling();
-        bestelling.setKlantID(view.getKlantId());
+        bestelling.setKlant(klant);
+        
+        //System.out.println("THIS IS A LOG: " + bestelling.getKlant().toString());
 
         //Nieuw artikel
-        ArtikelService AS = new ArtikelService();
-        Artikel artikel = AS.readByID(view.getArtikelId());
+        Artikel artikel = new ArtikelService().findById(view.getArtikelId());
         
         //Nieuw koppel
         BestellingArtikel koppel = new BestellingArtikel();
@@ -92,6 +104,8 @@ public class BestellingController {
         koppel.setBestelling(bestelling);
         
         bestelling.setBestellingArtikelSet(koppel);
+
+        System.out.println("THIS IS A LOG  1");
         bestellingService.save(bestelling);
     }
 

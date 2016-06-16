@@ -5,14 +5,10 @@
  */
 package View;
 
-import DAO.MySQL.ArtikelDAOMySQL;
-import POJO.Artikel;
-import POJO.Bestelling;
-import POJO.BestellingArtikel;
+
+import POJO.*;
 import formatMessage.PrintFormat;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 /**
  *
@@ -94,19 +90,19 @@ public class BestellingView {
         PrintFormat.printHeader("BESTELLINGGEGEVENS");
         System.out.printf("%15s\t\t| %15s\t\t|\n", "Bestelling ID", "Klant ID");
         for(Bestelling e : list){
-            System.out.printf("%15d\t\t| %15d\t\t|\n",e.getBestellingID(), e.getKlantID());
+            System.out.printf("%15d\t\t| %15d\t\t|\n",e.getBestellingID(), e.getKlant().toString());
         }
     }
     public void printArtikelen(Set<BestellingArtikel> list){
         PrintFormat.printHeader("BESTELLINGARTIKEL GEGEVENS");
         System.out.printf("%15s\t\t| %15s\t\t|\n", "aantal", "artikel");
         for(BestellingArtikel e : list){
-            System.out.printf("%15d\t\t| %15s\t\t|\n",e.getAantal(), e.getArtikel().getArtikel_naam());
+            System.out.printf("%15d\t\t| %15s\t\t|\n",e.getAantal(), e.getArtikel().getArtikelNaam());
         }
     }
     public void print(Bestelling bestelling){
         System.out.println("Bestelling ID: " + bestelling.getBestellingID());
-        System.out.println("Klant ID: " + bestelling.getKlantID());
+        System.out.println("Klant ID: " + bestelling.getKlant().toString());
     }
     public void keuzeFout(){
         System.out.println(" voeg opnieuw in");

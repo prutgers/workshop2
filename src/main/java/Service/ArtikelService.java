@@ -46,7 +46,7 @@ public class ArtikelService {
         DAO.closeCurrentSessionWithTransaction();
     }
     
-    public Artikel finById(int artikelId){
+    public Artikel findById(int artikelId){
         DAO.openCurrentSession();
         Artikel artikel = DAO.findById(artikelId);
         DAO.closeCurrentSession();
