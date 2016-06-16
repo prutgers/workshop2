@@ -35,28 +35,28 @@ public class Artikel {
     /**
      * @return the artikel_ID
      */
-    public int getArtikel_id() {
+    public int getArtikelId() {
         return artikelId;
     }
 
     /**
      * @return the artikel_naam
      */
-    public String getArtikel_naam() {
+    public String getArtikelNaam() {
         return artikelNaam;
     }
 
     /**
      * @param artikelNaam the artikel_naam to set
      */
-    public void setArtikel_naam(String artikelNaam) {
+    public void setArtikelNaam(String artikelNaam) {
         this.artikelNaam = artikelNaam;
     }
 
     /**
      * @return the artikel_voorraad
      */
-    public int getArtikel_voorraad() {
+    public int getArtikelVoorraad() {
         return artikelVoorraad;
     }
 
@@ -81,17 +81,4 @@ public class Artikel {
         this.artikelPrijs = artikelPrijs;
     }
 
-    /**
-     * @return the artikel_naam
-     */
-    public String getArtikelNaam() {
-        return artikelNaam;
-    }
-
-    /**
-     * @return the artikel_voorraad
-     */
-    public int getArtikelVoorraad() {
-        return artikelVoorraad;
-    }
 }
