@@ -5,7 +5,7 @@
  */
 package Controller;
 
-import Config.BestellingConfig;
+import Config.SpringConfig;
 import POJO.*;
 import Service.*;
 import View.*;
@@ -31,7 +31,7 @@ public class BestellingController {
     public BestellingService bestellingService;
     
     public BestellingController(){
-        ApplicationContext context = new AnnotationConfigApplicationContext(BestellingConfig.class);
+        ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
         BestellingService bestellingService = context.getBean(BestellingService.class);
         this.bestellingService = bestellingService;
     }
