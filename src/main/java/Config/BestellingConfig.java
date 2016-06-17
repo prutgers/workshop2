@@ -13,7 +13,9 @@ import org.springframework.context.annotation.*;
  * @author Gebruiker
  */
 @Configuration
+@ComponentScan
 public class BestellingConfig {
+    /*
     @Bean 
     public IBestellingDAO bestellingDAO(){
         return new BestellingDAOHibernate();
@@ -22,6 +24,7 @@ public class BestellingConfig {
     public BestellingService bestellingService(IBestellingDAO bestellingDAO){
         return new BestellingService(bestellingDAO);
     }
+    */
     /*
     @Bean
     public BestellingController bestellingController(BestellingService bestellingService){

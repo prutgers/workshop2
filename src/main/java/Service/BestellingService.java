@@ -8,14 +8,19 @@ package Service;
 import POJO.*;
 import interfaceDAO.*;
 import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Peter
  */
+
+@Component
 public class BestellingService {
     private static IBestellingDAO DAO;
     
+    @Autowired
     public BestellingService(IBestellingDAO bestellingDAO){
         DAO = bestellingDAO;
     }
