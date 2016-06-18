@@ -108,5 +108,6 @@ public class GenericDAO<T, PK extends Serializable> {
         getCurrentSession().update(entity);
     }
     
+    
 }
     
