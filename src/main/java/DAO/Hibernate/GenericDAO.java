@@ -16,13 +16,14 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import interfaceDAO.IGenericDAO;
+import java.io.Serializable;
 
 /**
  *
  * @author Peter
  */
 
-public class GenericDAO<T> implements IGenericDAO {
+public class GenericDAO<T> implements IGenericDAO, Serializable {
      private Session currentSession;
     private Transaction currentTransaction;
     private Class<T> classje;
