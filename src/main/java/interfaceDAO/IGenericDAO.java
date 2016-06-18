@@ -5,18 +5,19 @@
  */
 package interfaceDAO;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author Peter
  */
-public interface IGenericDAO<T, Id> {
+public interface IGenericDAO<T, PK extends Serializable> {
         public void save(T entity);
-        public T findById(Id id);
+        public T findById(PK id);
         public void delete(T entity);
         public List<T> findAll();
-        public void update();
+        public void update(T entity);
         
     
 }
