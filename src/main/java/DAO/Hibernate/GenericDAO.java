@@ -8,14 +8,11 @@
 package DAO.Hibernate;
 
 import POJO.*;
-import interfaceDAO.IBestellingDAO;
-import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.*;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import interfaceDAO.IGenericDAO;
 import java.io.Serializable;
 
 /**
@@ -23,14 +20,14 @@ import java.io.Serializable;
  * @author Peter
  */
 
-public class GenericDAO<T> implements IGenericDAO, Serializable {
+public class GenericDAO<T, PK extends Serializable> {
      private Session currentSession;
     private Transaction currentTransaction;
-    private Class<T> classje;
+    private Class<T> type;
     
-    
-    public GenericDAO(Class<T> classje){
-        this.classje = classje;
+    //Contructor om het type te defineren.
+    public GenericDAO(Class<T> type){
+        this.type = type;
     }
     
     public Session getCurrentSession() {
@@ -81,35 +78,34 @@ public class GenericDAO<T> implements IGenericDAO, Serializable {
         SessionFactory sf = ms.buildMetadata().buildSessionFactory();
         return sf;
     }
+
     
     
-    @Override
-    public void save(Object entity) {
+    public void save(T entity) {
         getCurrentSession().save(entity);
     }
 
-    @Override
-    public Object findById(Object id) {
-        T entity;   
-         entity = (T)getCurrentSession().get(classje, id);
-         return entity;
+    
+    public Object findById(PK id) {
+        T entity = (T)getCurrentSession().get(type, id);
+        return entity;
     }
 
     
-
-    @Override
-    public List findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void delete(T entity) {
+        getCurrentSession().delete(entity);
     }
 
-    @Override
-    public void update() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
-    @Override
-    public void delete(Object entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<T> findAll() {
+        List<T> entities = (List<T>) getCurrentSession().createCriteria(type).list();
+        return entities;
+        
+    }
+
+    
+    public void update(T entity) {
+        getCurrentSession().update(entity);
     }
     
 }
