@@ -8,19 +8,20 @@
 package DAO.Hibernate;
 
 import POJO.*;
+import interfaceDAO.IGenericDAO;
 import java.util.List;
 import org.hibernate.*;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import java.io.Serializable;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Peter
  */
-
-public class GenericDAO<T, PK extends Serializable> {
+public class GenericDAO<T, PK extends Serializable> implements IGenericDAO<T, PK> {
      private Session currentSession;
     private Transaction currentTransaction;
     private Class<T> type;
@@ -75,6 +76,7 @@ public class GenericDAO<T, PK extends Serializable> {
         ms.addAnnotatedClass(Artikel.class);
         ms.addAnnotatedClass(Klant.class);
         ms.addAnnotatedClass(Adres.class);
+        ms.addAnnotatedClass(Account.class);
         SessionFactory sf = ms.buildMetadata().buildSessionFactory();
         return sf;
     }
@@ -82,7 +84,9 @@ public class GenericDAO<T, PK extends Serializable> {
     
     
     public void save(T entity) {
+        openCurrentSessionWithTransaction();
         getCurrentSession().save(entity);
+        closeCurrentSessionWithTransaction();
     }
 
     

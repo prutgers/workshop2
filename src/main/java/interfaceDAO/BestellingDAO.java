@@ -13,7 +13,9 @@ import java.util.ArrayList;
  *
  * @author Gebruiker
  */
-public interface BestellingDAO {
+public interface BestellingDAO extends IGenericDAO{
+
+/*
     public Bestelling createBestelling(Bestelling bestelling);
     
     public Bestelling getBestellingById(int BestellingId);
@@ -25,4 +27,5 @@ public interface BestellingDAO {
     public void updateBestelling(Bestelling bestelling);
     
     public void deleteBestelling(int bestelling_id);
+*/
 }

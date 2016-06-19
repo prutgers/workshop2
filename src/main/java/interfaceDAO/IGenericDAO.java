@@ -14,10 +14,9 @@ import java.util.List;
  */
 public interface IGenericDAO<T, PK extends Serializable> {
         public void save(T entity);
-        public T findById(PK id);
+        public Object findById(PK id);
         public void delete(T entity);
         public List<T> findAll();
         public void update(T entity);
-        
-    
+
 }

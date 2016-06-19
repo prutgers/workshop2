@@ -32,8 +32,8 @@ public class BestellingController {
     
     public BestellingController(){
         ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
-        BestellingService bestellingService = context.getBean(BestellingService.class);
-        this.bestellingService = bestellingService;
+        BestellingService bs = context.getBean(BestellingService.class);
+        this.bestellingService = bs;
     }
             
     public void startKeuze(){

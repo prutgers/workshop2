@@ -13,7 +13,7 @@ import org.springframework.context.annotation.*;
  * @author Gebruiker
  */
 @Configuration
-@ComponentScan
+@ComponentScan(basePackages={"Service","DAO.Hibernate"})
 public class SpringConfig {
     /*
     @Bean 
@@ -24,7 +24,7 @@ public class SpringConfig {
     public BestellingService bestellingService(IBestellingDAO bestellingDAO){
         return new BestellingService(bestellingDAO);
     }
-    */
+    
     /*
     @Bean
     public BestellingController bestellingController(BestellingService bestellingService){

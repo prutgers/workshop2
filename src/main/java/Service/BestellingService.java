@@ -35,14 +35,14 @@ public class BestellingService {
     //read all bestelling
     public ArrayList<Bestelling>findAll(){
         //DAO.openCurrentSession();
-        ArrayList<Bestelling> bestellingen = DAO.findAll();
+        ArrayList<Bestelling> bestellingen = (ArrayList<Bestelling>) DAO.findAll();
         //DAO.closeCurrentSession();
         return bestellingen;
     }
     //read bestelling
     public Bestelling findById(int bestellingId){
         //DAO.openCurrentSession();
-        Bestelling bestelling = DAO.findById(bestellingId);
+        Bestelling bestelling = (Bestelling)DAO.findById(bestellingId);
         //DAO.closeCurrentSession();
         return bestelling;
     }
