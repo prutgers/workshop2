@@ -11,8 +11,17 @@ import java.util.ArrayList;
 /**
  *
  * @author Peter
+ * 
+ */
+
+/**
+ * 
+ * Lege interface om de speciaal alleen om de service laag te vergelijken
+ * Eventueel kan je hier nog dingen toevoegen zoals findByVoorraad()
  */
 public interface IArtikelDAO {
+    
+    /**
     Artikel save(Artikel artikel);
     
     Artikel findById(int artikel_id);
@@ -22,4 +31,5 @@ public interface IArtikelDAO {
     void delete(Artikel artikel);
 
     void update(Artikel artikel);
+    */
 }
