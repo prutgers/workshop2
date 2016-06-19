@@ -83,6 +83,7 @@ public class GenericDAO<T, PK extends Serializable> implements IGenericDAO<T, PK
 
     
     
+     @Override
     public void save(T entity) {
         openCurrentSessionWithTransaction();
         getCurrentSession().save(entity);
@@ -90,6 +91,7 @@ public class GenericDAO<T, PK extends Serializable> implements IGenericDAO<T, PK
     }
 
     
+     @Override
     public Object findById(PK id) {
         T entity = (T)getCurrentSession().get(type, id);
         return entity;
