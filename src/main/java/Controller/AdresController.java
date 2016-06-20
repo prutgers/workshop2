@@ -6,7 +6,7 @@ package Controller;
  * 
  */
 
-import Config.AdresConfig;
+import Config.SpringConfig;
 import View.AdresView;
 import POJO.Adres;
 import Service.AdresService;
@@ -20,7 +20,7 @@ public class AdresController {
     public AdresService adresService;
     
     public AdresController() {
-        ApplicationContext context = new AnnotationConfigApplicationContext(AdresConfig.class);
+        ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
         AdresService adresService = context.getBean(AdresService.class);
         this.adresService = adresService;
     }
