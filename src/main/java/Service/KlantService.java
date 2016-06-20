@@ -5,56 +5,48 @@
  */
 package Service;
 
-import DAO.Hibernate.*;
 import POJO.*;
+import interfaceDAO.IKlantDAO;
 import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Lucas
  */
+@Component
 public class KlantService {
-    private static KlantDAOHibernate DAO;
+    private static IKlantDAO DAO;
     
-    public KlantService(){
-        DAO = new KlantDAOHibernate();
+    @Autowired
+    public KlantService(IKlantDAO klantDAO){
+        DAO = klantDAO;
     }
     
     public void save(Klant klant){
-        DAO.openCurrentSessionWithTransaction();
         DAO.save(klant);
-        DAO.closeCurrentSessionWithTransaction();
     }
     public Klant findById(int klantId){
-        DAO.openCurrentSessionWithTransaction();
-        Klant klant = DAO.findById(klantId);
-        DAO.closeCurrentSessionWithTransaction();
+        Klant klant = (Klant)DAO.findById(klantId);
         return klant;
     }
     
     public ArrayList<Klant> findAll(){
-        DAO.openCurrentSessionWithTransaction();
-        ArrayList<Klant> klantList = DAO.findAll();
-        DAO.closeCurrentSessionWithTransaction();
+        ArrayList<Klant> klantList = (ArrayList<Klant>)DAO.findAll();
         return klantList;
     }
     
     public void update(Klant klant){
-        DAO.openCurrentSessionWithTransaction();
         DAO.update(klant);
-        DAO.closeCurrentSessionWithTransaction();
     }
     
     public void delete(int klantId){
-        DAO.openCurrentSessionWithTransaction();
         DAO.delete(klantId);
-        DAO.closeCurrentSessionWithTransaction();
     }
     
     public void delete(Klant klant){
-        DAO.openCurrentSessionWithTransaction();
         DAO.delete(klant);
-        DAO.closeCurrentSessionWithTransaction();
     }
     
 }
