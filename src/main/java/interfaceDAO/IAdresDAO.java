@@ -1,16 +1,16 @@
 package interfaceDAO;
 
 import POJO.Adres;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 /**
  *
  * @author Sonja
  */
 
-public interface IAdresDAO {
+public interface IAdresDAO extends IGenericDAO<Adres, Integer> {
 
-    Adres save(Adres adres);
+    /*Adres save(Adres adres);
     
     ArrayList<Adres> findAll();
     
@@ -20,5 +20,5 @@ public interface IAdresDAO {
     
     void delete(int adresId);
     
-    void delete(Adres adres);
+    void delete(Adres adres);*/
 }
