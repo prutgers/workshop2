@@ -29,11 +29,12 @@ public class BestellingController {
     */
     
     public BestellingService bestellingService;
+    public ArtikelService artikelService;
     
     public BestellingController(){
         ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
-        BestellingService bs = context.getBean(BestellingService.class);
-        this.bestellingService = bs;
+        this.bestellingService = context.getBean(BestellingService.class);
+        this.artikelService = context.getBean(ArtikelService.class);
     }
             
     public void startKeuze(){
@@ -97,7 +98,7 @@ public class BestellingController {
         //System.out.println("THIS IS A LOG: " + bestelling.getKlant().toString());
 
         //Nieuw artikel
-        Artikel artikel = new ArtikelService().findById(view.getArtikelId());
+        Artikel artikel = artikelService.findById(view.getArtikelId());
         
         //Nieuw koppel
         BestellingArtikel koppel = new BestellingArtikel();
@@ -117,7 +118,7 @@ public class BestellingController {
         Bestelling bestelling = bestellingService.findById(view.getBestellingId());
         
         //haal artikel op
-        Artikel artikel = new ArtikelService().findById(view.getArtikelId());
+        Artikel artikel = artikelService.findById(view.getArtikelId());
         
         //maak nieuw koppel aan
         BestellingArtikel bestellingArtikel = new BestellingArtikel();
