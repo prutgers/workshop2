@@ -30,7 +30,7 @@ public class MainController {
                 ArtikelController.startKeuze();
                 break;            
             case 4:
-                AdresController.startKeuze();
+                new AdresController().startKeuze();
                 break;
             case 5:
                 ConfigController.setConnection();
