@@ -24,10 +24,24 @@ import interfaceDAO.KlantDAO;
 import interfaceDAO.AdresDAO;
 import interfaceDAO.KlantAdresDAO;
 
+import Service.*;
+import Config.SpringConfig;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 
 public class KlantController {
-    private KlantDAO klantDAO;
     private KlantView kView = new KlantView();
+    public KlantService klantService;
+    public AdresService adresService;
+    
+    
+    public KlantController(){
+        ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        this.klantService = context.getBean(KlantService.class);
+        this.adresService = context.getBean(AdresService.class);
+    }
+    
     
     public static void startKeuze(){
         KlantController deze = new KlantController();
@@ -64,19 +78,14 @@ public class KlantController {
     
     public void create(){
         kView.create();
-        Klant klant = new Klant();
-        klant.setVoornaam(kView.getVoornaam());
-        klant.setAchternaam(kView.getAchternaam());
-        klant.setTussenvoegsel(kView.getTussenvoegsel());
-        klant.setEmail(kView.getEmail());
+        Klant klant = klantViewToKlant(kView);
         
-        klantDAO = new DAOFactory().getKlantDAO();
-        try {
-            klantDAO.createKlant(klant);
-        }
-        catch (MySQLIntegrityConstraintViolationException ex){
-            kView.KlantBestaatAl();
-        }
+//        try {
+            klantService.save(klant);
+//        }
+//        catch (MySQLIntegrityConstraintViolationException ex){
+//            kView.KlantBestaatAl();
+//        }
         
         //maak een nieuw adres aan
         AdresView adresView = new AdresView();
@@ -90,56 +99,52 @@ public class KlantController {
         adres.setPostcode(adresView.getPostcode());
         adres.setWoonplaats(adresView.getWoonplaats());
         
-        AdresDAO aDAO = DAOFactory.getAdresDAO();
-        aDAO.createAdres(adres);
         
+        adresService.save(adres);
         //koppel de klant aan het adres
-        KlantAdres klantAdres = new KlantAdres();
-        klantAdres.setKlant_id( klant.getKlant_id() );
-        klantAdres.setAdres_id( adres.getAdres_id() );
+        klant.setAdresSet(adres);
+        klantService.update(klant);
         
         
-        KlantAdresDAO klantAdresDAO = new DAOFactory().getKlantAdresDAO();
-        try {
-            klantAdresDAO.createKlantAdresKoppel(klantAdres);
-        }
-        catch (MySQLIntegrityConstraintViolationException ex){
-        }
 
     }
     
     public void read(){
         kView.read();
-        kView.print(new DAOFactory().getKlantDAO().readKlant( kView.getKlant_id() )
+        kView.print(klantService.findById( kView.getKlant_id() )
         );
     }
     
     public void update(){
         Klant klant = klantViewToKlant( kView.update() );
-        kView.printUpdate(new DAOFactory().getKlantDAO().updateKlant(klant)
-        );
+        kView.printUpdate(klantService.update(klant) );
     }
     
+//    public void delete(){
+//        kView.delete();
+//        KlantAdresDAO klantAdresDAO = new DAOFactory().getKlantAdresDAO();
+//        klantAdresDAO.deleteKlantAdresKoppel( kView.getKlant_id() );
+//        try {
+//        new DAOFactory().getKlantDAO().deleteKlant( kView.getKlant_id() );
+//        }
+//        catch (MySQLIntegrityConstraintViolationException ex){
+//            kView.KlantInKlantAdresTabel();
+//        }
+//    }
     public void delete(){
         kView.delete();
-        KlantAdresDAO klantAdresDAO = new DAOFactory().getKlantAdresDAO();
-        klantAdresDAO.deleteKlantAdresKoppel( kView.getKlant_id() );
-        try {
-        new DAOFactory().getKlantDAO().deleteKlant( kView.getKlant_id() );
-        }
-        catch (MySQLIntegrityConstraintViolationException ex){
-            kView.KlantInKlantAdresTabel();
-        }
+        klantService.delete( klantViewToKlant(kView) );
     }
     
     public void readAllByObject(){
-        kView.readAllByKlant();
-        kView.print(new DAOFactory().getKlantDAO().readAllKlantByKlant( klantViewToKlant( kView ) )
-        );
+        System.out.println("Function not supported atm.");
+//        kView.readAllByKlant();
+//        kView.print(new DAOFactory().getKlantDAO().readAllKlantByKlant( klantViewToKlant( kView ) )
+//        );
     }
     
     public void readAll(){
-        kView.print(new DAOFactory().getKlantDAO().readAllKlantByKlant( new Klant() )
+        kView.print(klantService.findAll()
         );
     }
     

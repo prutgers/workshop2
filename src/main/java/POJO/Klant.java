@@ -156,6 +156,11 @@ public class Klant implements Serializable {
 //    public void setFactuurSet(Set<Factuur> factuurSet) {
 //        this.factuurSet = factuurSet;
 //    }
+//    
+//    public void setFactuurSet(Factuur factuur) {
+//        this.factuurSet.add(factuur);
+//    }
+    
 
     /**
      * @return the accountSet
@@ -170,6 +175,10 @@ public class Klant implements Serializable {
     public void setAccountSet(Set<Account> accountSet) {
         this.accountSet = accountSet;
     }
+    
+    public void setAccountSet(Account account) {
+        this.accountSet.add(account);
+    }
 
     /**
      * @return the adresSet
@@ -183,5 +192,9 @@ public class Klant implements Serializable {
      */
     public void setAdresSet(Set<Adres> adresSet) {
         this.adresSet = adresSet;
+    }
+    
+    public void setAdresSet(Adres adres) {
+        this.adresSet.add(adres);
     }
 }
