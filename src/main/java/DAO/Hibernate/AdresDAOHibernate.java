@@ -1,6 +1,10 @@
 package DAO.Hibernate;
 
 import POJO.Adres;
+import POJO.Artikel;
+import POJO.Bestelling;
+import POJO.BestellingArtikel;
+import POJO.Klant;
 import interfaceDAO.*;
 import java.util.ArrayList;
 import org.hibernate.*;
@@ -60,40 +64,59 @@ public class AdresDAOHibernate implements IAdresDAO {
                 .configure("hibernate.cfg.xml").build();
         MetadataSources mS = new MetadataSources(ssr);
         mS.addAnnotatedClass(Adres.class);
+        mS.addAnnotatedClass(Bestelling.class);
+        mS.addAnnotatedClass(BestellingArtikel.class);
+        mS.addAnnotatedClass(Artikel.class);
+        mS.addAnnotatedClass(Klant.class);
         SessionFactory sessionFactory = mS.buildMetadata().buildSessionFactory();
         return sessionFactory;
     }
    
+    @Override
     public Adres save(Adres adres) {
+        openCurrentSession();
         getCurrentSession().save(adres);
+        closeCurrentSession();
         return adres;
     }
 
     @SuppressWarnings("unchecked")
+    @Override
     public ArrayList<Adres> findAll() {
+        openCurrentSession();
         ArrayList<Adres> adresGegevens = (ArrayList<Adres>)getCurrentSession()
                 .createQuery("from Adres").list();
+        closeCurrentSession();
         return adresGegevens;
     }
 
+    @Override
     public Adres findById(int adresId) {
+        openCurrentSession();
         Adres adres = (Adres)getCurrentSession().get(Adres.class, adresId);
+        closeCurrentSession();
         return adres;
     }
 
     @Override
     public void update(Adres adres) {
+        openCurrentSessionWithTransaction();
         getCurrentSession().update(adres); 
+        closeCurrentSessionWithTransaction();
     }
 
     @Override
     public void delete(Adres adres) {
+        openCurrentSessionWithTransaction();
         getCurrentSession().delete(adres); 
+        closeCurrentSessionWithTransaction();
     }
 
     @Override
     public void delete(int adresId) {
+        openCurrentSessionWithTransaction();
         Adres adres = (Adres)getCurrentSession().get(Adres.class, adresId);
         getCurrentSession().delete(adres); 
+        closeCurrentSessionWithTransaction();
     }
 }
