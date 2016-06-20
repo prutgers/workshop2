@@ -1,7 +1,7 @@
 package DAO.Hibernate;
 
 import POJO.Adres;
-import POJO.Artikel;
+/*import POJO.Artikel;
 import POJO.Bestelling;
 import POJO.BestellingArtikel;
 import POJO.Klant;
@@ -10,16 +10,19 @@ import java.util.ArrayList;
 import org.hibernate.*;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;*/
 
 /**
  *
  * @author Sonja
  */
 
-public class AdresDAOHibernate implements IAdresDAO {
+public class AdresDAOHibernate extends GenericDAO<Adres,Integer> {
+    public AdresDAOHibernate() {
+        super(Adres.class);
+    }
     
-    private Session currentSession;
+    /*private Session currentSession;
     private Transaction currentTransaction;
     
     public Session openCurrentSession(){
@@ -118,5 +121,5 @@ public class AdresDAOHibernate implements IAdresDAO {
         Adres adres = (Adres)getCurrentSession().get(Adres.class, adresId);
         getCurrentSession().delete(adres); 
         closeCurrentSessionWithTransaction();
-    }
+    }*/
 }
