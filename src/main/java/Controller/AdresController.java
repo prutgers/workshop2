@@ -4,38 +4,46 @@ package Controller;
  *
  * @author Sonja
  * 
- * AdresController is part of the Adres MVC
- * 
  */
 
+import Config.AdresConfig;
 import View.AdresView;
-import DAOFactory.DAOFactory;
 import POJO.Adres;
+import Service.AdresService;
 import View.AdresKeuzeView;
-import interfaceDAO.AdresDAO;
-import interfaceDAO.KlantAdresDAO;
-import java.util.ArrayList;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class AdresController {
+    public static AdresView adresView = new AdresView();
     
-    public static void startKeuze() {
+    public AdresService adresService;
+    
+    public AdresController() {
+        ApplicationContext context = new AnnotationConfigApplicationContext(AdresConfig.class);
+        AdresService adresService = context.getBean(AdresService.class);
+        this.adresService = adresService;
+    }
+    
+    public void startKeuze() {
         AdresKeuzeView view = new AdresKeuzeView();
         view.keuze();
+        
         switch (view.getSelect()) {
             case 1:
-                AdresController.create();
+                create();
                 break;
             case 2:
-                AdresController.update();
+                update();
                 break;
             case 3:
-                AdresController.readAll();
+                readAll();
                 break;
             case 4:
-                AdresController.readByID();
+                readByID();
                 break;
             case 5: 
-                AdresController.delete();
+                delete();
                 break;
             case 0:
                 MainController.hoofdMenu();
@@ -49,8 +57,7 @@ public class AdresController {
         }
     }
     
-    public static void create() {
-        AdresView adresView = new AdresView();
+    public void create() {
         adresView.create();
         Adres adres = new Adres();
         
@@ -61,12 +68,10 @@ public class AdresController {
         adres.setPostcode(adresView.getPostcode());
         adres.setWoonplaats(adresView.getWoonplaats());
         
-        AdresDAO aDAO = DAOFactory.getAdresDAO();
-        aDAO.createAdres(adres);
+        adresService.save(adres);
     }
     
-    public static void update() {
-        AdresView adresView = new AdresView();
+    public void update() {
         adresView.update();
         Adres adres = new Adres();
         
@@ -76,34 +81,20 @@ public class AdresController {
         adres.setPostcode(adresView.getPostcode());
         adres.setWoonplaats(adresView.getWoonplaats());
         
-        AdresDAO aDAO = DAOFactory.getAdresDAO();
-        aDAO.updateAdres(adres);
+        adresService.update(adres);
     }
     
-    public static void readAll() {
-        AdresView adresView = new AdresView();
-        AdresDAO aDAO = DAOFactory.getAdresDAO();
-        ArrayList<Adres> adresGegevens = aDAO.readAdres();
-        adresView.readAll(adresGegevens);
+    public void readAll() {
+        adresView.readAll(adresService.findAll());
     }
     
-    public static void readByID() {
-        AdresView adresView = new AdresView();
+    public void readByID() {
         adresView.readAdresByID();
-        
-        AdresDAO aDAO = DAOFactory.getAdresDAO();
-        Adres adres = aDAO.readAdresByID(adresView.getAdres_id());
-        adresView.readAdresByID(adres);
+        adresView.readAdresByID(adresService.findById(adresView.getAdres_id()));
     }
     
-    public static void delete() {
-        AdresView adresView = new AdresView();
+    public void delete() {
         adresView.readAdresByID();
-        
-        KlantAdresDAO kaDAO = DAOFactory.getKlantAdresDAO();
-        kaDAO.deleteAdresKlantKoppel(adresView.getAdres_id());
-  
-        AdresDAO aDAO = DAOFactory.getAdresDAO();
-        aDAO.deleteAdres(adresView.getAdres_id());
+        adresService.delete(adresView.getAdres_id());
     }
 }
