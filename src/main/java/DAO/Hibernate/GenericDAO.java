@@ -93,25 +93,33 @@ public class GenericDAO<T, PK extends Serializable> implements IGenericDAO<T, PK
     
      @Override
     public Object findById(PK id) {
+        openCurrentSessionWithTransaction();
         T entity = (T)getCurrentSession().get(type, id);
+        closeCurrentSessionWithTransaction();
         return entity;
     }
 
     
     public void delete(T entity) {
+        openCurrentSessionWithTransaction();
         getCurrentSession().delete(entity);
+        closeCurrentSessionWithTransaction();
     }
 
     
     public List<T> findAll() {
+        openCurrentSessionWithTransaction();
         List<T> entities = (List<T>) getCurrentSession().createCriteria(type).list();
+        closeCurrentSessionWithTransaction();
         return entities;
         
     }
 
     
     public void update(T entity) {
+        openCurrentSessionWithTransaction();
         getCurrentSession().update(entity);
+        closeCurrentSessionWithTransaction();
     }
     
     
