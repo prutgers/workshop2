@@ -83,18 +83,18 @@ public class AdresDAOHibernate implements IAdresDAO {
     @SuppressWarnings("unchecked")
     @Override
     public ArrayList<Adres> findAll() {
-        openCurrentSession();
+        openCurrentSessionWithTransaction();
         ArrayList<Adres> adresGegevens = (ArrayList<Adres>)getCurrentSession()
                 .createQuery("from Adres").list();
-        closeCurrentSession();
+        closeCurrentSessionWithTransaction();
         return adresGegevens;
     }
 
     @Override
     public Adres findById(int adresId) {
-        openCurrentSession();
+        openCurrentSessionWithTransaction();
         Adres adres = (Adres)getCurrentSession().get(Adres.class, adresId);
-        closeCurrentSession();
+        closeCurrentSessionWithTransaction();
         return adres;
     }
 
