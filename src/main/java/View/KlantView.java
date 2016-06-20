@@ -13,7 +13,6 @@ package View;
  * 
  */
 
-import DAOFactory.DAOFactory;
 import POJO.Klant;
 import formatMessage.PrintFormat;
 import java.util.ArrayList;

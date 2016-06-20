@@ -37,8 +37,9 @@ public class KlantService {
         return klantList;
     }
     
-    public void update(Klant klant){
+    public Klant update(Klant klant){
         DAO.update(klant);
+        return klant;
     }
     
     public void delete(int klantId){
