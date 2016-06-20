@@ -11,6 +11,7 @@ import View.ArtikelView;
 import interfaceDAO.BestellingArtikelDAO;
 import java.util.ArrayList;
 import interfaceDAO.IArtikelDAO;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -18,45 +19,33 @@ import interfaceDAO.IArtikelDAO;
  */
 public class ArtikelService {
     
-    private static ArtikelDAOHibernate DAO;
+    private static IArtikelDAO DAO;
     
-    public ArtikelService(){
-        DAO = new ArtikelDAOHibernate();
+    @Autowired
+    public ArtikelService(IArtikelDAO iArtikelDAO){
+        DAO = iArtikelDAO;
     }
-    
-    
     
     public void save(Artikel artikel){
-        DAO.openCurrentSessionWithTransaction();
         DAO.save(artikel);
-        DAO.closeCurrentSessionWithTransaction();
-        
-    }
+       }
     
     public void update(Artikel artikel){
-        DAO.openCurrentSessionWithTransaction();
         DAO.update(artikel);
-        DAO.closeCurrentSessionWithTransaction();
     }
     
     public void delete(int artikelId){
-        Artikel artikel = DAO.findById(artikelId);
-        DAO.openCurrentSessionWithTransaction();
+        Artikel artikel = (Artikel)DAO.findById(artikelId);
         DAO.delete(artikel); 
-        DAO.closeCurrentSessionWithTransaction();
     }
     
     public Artikel findById(int artikelId){
-        DAO.openCurrentSession();
-        Artikel artikel = DAO.findById(artikelId);
-        DAO.closeCurrentSession();
+        Artikel artikel = (Artikel)DAO.findById(artikelId);
         return artikel;
     }
     
     public ArrayList<Artikel> findAll(){
-        DAO.openCurrentSessionWithTransaction();
-        ArrayList<Artikel> artikelLijst = DAO.findAll();
-        DAO.closeCurrentSessionWithTransaction();
+        ArrayList<Artikel> artikelLijst = (ArrayList<Artikel>)DAO.findAll();
         return artikelLijst;
     }
     

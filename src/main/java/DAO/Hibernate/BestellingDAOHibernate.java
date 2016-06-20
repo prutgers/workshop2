@@ -23,6 +23,7 @@ public class BestellingDAOHibernate extends GenericDAO<Bestelling,Integer> imple
     public BestellingDAOHibernate() {
         super(Bestelling.class);
     }
+    @Override
     public ArrayList<Bestelling> findByKlantId(int klantId){
         openCurrentSessionWithTransaction();
         Query query = getCurrentSession().createQuery("from Bestelling where id = :klantId");

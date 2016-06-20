@@ -6,6 +6,7 @@
 package interfaceDAO;
 
 import POJO.Artikel;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -19,7 +20,7 @@ import java.util.ArrayList;
  * Lege interface om de speciaal alleen om de service laag te vergelijken
  * Eventueel kan je hier nog dingen toevoegen zoals findByVoorraad()
  */
-public interface IArtikelDAO {
+public interface IArtikelDAO extends IGenericDAO<Artikel, Integer> {
     
     /**
     Artikel save(Artikel artikel);
@@ -32,4 +33,6 @@ public interface IArtikelDAO {
 
     void update(Artikel artikel);
     */
+    
+    
 }
