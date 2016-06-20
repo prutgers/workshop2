@@ -28,12 +28,12 @@ public class AdresService {
     }
     
     public ArrayList<Adres> findAll() {
-        ArrayList<Adres> adresGegevens = DAO.findAll();
+        ArrayList<Adres> adresGegevens = (ArrayList<Adres>)DAO.findAll();
         return adresGegevens;
     }
     
     public Adres findById(int adresId) {
-        Adres adres= DAO.findById(adresId);
+        Adres adres = (Adres)DAO.findById(adresId);
         return adres;
     }
     
