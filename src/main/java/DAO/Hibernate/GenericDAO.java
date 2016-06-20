@@ -80,8 +80,6 @@ public class GenericDAO<T, PK extends Serializable> implements IGenericDAO<T, PK
         SessionFactory sf = ms.buildMetadata().buildSessionFactory();
         return sf;
     }
-
-    
     
      @Override
     public void save(T entity) {
@@ -100,6 +98,7 @@ public class GenericDAO<T, PK extends Serializable> implements IGenericDAO<T, PK
     }
 
     
+     @Override
     public void delete(T entity) {
         openCurrentSessionWithTransaction();
         getCurrentSession().delete(entity);
@@ -107,6 +106,7 @@ public class GenericDAO<T, PK extends Serializable> implements IGenericDAO<T, PK
     }
 
     
+     @Override
     public List<T> findAll() {
         openCurrentSessionWithTransaction();
         List<T> entities = (List<T>) getCurrentSession().createCriteria(type).list();
@@ -116,6 +116,7 @@ public class GenericDAO<T, PK extends Serializable> implements IGenericDAO<T, PK
     }
 
     
+     @Override
     public void update(T entity) {
         openCurrentSessionWithTransaction();
         getCurrentSession().update(entity);
