@@ -30,11 +30,14 @@ public class BestellingController {
     
     public BestellingService bestellingService;
     public ArtikelService artikelService;
+    public KlantService klantService;
     
     public BestellingController(){
         ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
         this.bestellingService = context.getBean(BestellingService.class);
         this.artikelService = context.getBean(ArtikelService.class);
+        this.klantService = context.getBean(KlantService.class);
+                
     }
             
     public void startKeuze(){
@@ -89,7 +92,7 @@ public class BestellingController {
         //maak een nieuwe bestellingview waarin je vraagt voor welke klant
         //de bestelling is
         view.readKlantID();
-        Klant klant = new KlantService().findById(view.getKlantId());
+        Klant klant = klantService.findById(view.getKlantId());
         
         //Nieuwe Bestelling
         Bestelling bestelling = new Bestelling();
