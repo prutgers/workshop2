@@ -3,16 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+
+/**
+ * 
+ * 
+ *  Allemaal niet meer nodig
+ *
 package Controller;
 
 import POJO.*;
 import Service.*;
 import View.*;
 
-/**
- *
- * @author Gebruiker
- */
+
 public class BestellingArtikelController {
     
     private static BestellingArtikelView view  = new BestellingArtikelView();
@@ -55,3 +59,4 @@ public class BestellingArtikelController {
     }
 
 }
+*/
