@@ -24,7 +24,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  * @author Peter
  */
 public class ArtikelController {
-    
     public ArtikelService artikelService;
     
     public ArtikelController() {
@@ -35,21 +34,22 @@ public class ArtikelController {
     public static void startKeuze(){
         ArtikelKeuzeView view = new ArtikelKeuzeView();   
         view.keuze();
+        ArtikelController AC = new ArtikelController();
         switch (view.getSelect()) {
             case 1:
-                ArtikelController.create();
+                AC.create();
                 break;
             case 2:
-                ArtikelController.update();
+                AC.update();
                 break;
             case 3:
-                ArtikelController.readAll();
+                AC.readAll();
                 break;            
             case 4:
-                ArtikelController.readByID();
+                AC.readByID();
                 break;
             case 5:
-                ArtikelController.delete();
+                AC.delete();
                 break;
             case 0:
                 MainController.hoofdMenu();
@@ -63,7 +63,7 @@ public class ArtikelController {
         }
     }
     
-    public static void create(){
+    public void create(){
         ArtikelView aView = new ArtikelView();
         aView.create();
         Artikel artikel = new Artikel();
@@ -72,11 +72,9 @@ public class ArtikelController {
         artikel.setArtikelVoorraad(aView.getArtikel_voorraad());
         
         artikelService.save(artikel);
-        
-        
     }
     
-    public static void update(){
+    public void update(){
         ArtikelView aView = new ArtikelView();
         aView.update();
         Artikel artikel = new Artikel();                      
@@ -87,28 +85,23 @@ public class ArtikelController {
         artikel.setArtikelPrijs(aView.getArtikel_prijs());
          
         artikelService.update(artikel);
-        
     }
     
-    public static void delete(){
+    public void delete(){
         ArtikelView aView = new ArtikelView();
         aView.delete();
         artikelService.delete(aView.getArtikel_id());
      }
     
-    public static void readByID(){
+    public void readByID(){
         ArtikelView aView = new ArtikelView();
         aView.readArtikelById();
-        
-        
         aView.print(artikelService.findById(aView.getArtikel_id()));
     }
     
-    public static void readAll(){
+    public void readAll(){
         //nodig om de print functie aan te roepen
         ArtikelView aView = new ArtikelView();
-        
-        
         aView.print(artikelService.findAll());
     }
 }
