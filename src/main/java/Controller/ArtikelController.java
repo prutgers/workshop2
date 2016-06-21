@@ -70,7 +70,6 @@ public class ArtikelController {
         artikel.setArtikelNaam(aView.getArtikel_naam());
         artikel.setArtikelPrijs(aView.getArtikel_prijs());
         artikel.setArtikelVoorraad(aView.getArtikel_voorraad());
-        
         artikelService.save(artikel);
     }
     
@@ -78,12 +77,10 @@ public class ArtikelController {
         ArtikelView aView = new ArtikelView();
         aView.update();
         Artikel artikel = new Artikel();                      
-
         artikel.setArtikelID(aView.getArtikel_id());
         artikel.setArtikelNaam(aView.getArtikel_naam());
         artikel.setArtikelVoorraad(aView.getArtikel_voorraad());
         artikel.setArtikelPrijs(aView.getArtikel_prijs());
-         
         artikelService.update(artikel);
     }
     
