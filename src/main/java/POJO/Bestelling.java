@@ -89,7 +89,7 @@ public class Bestelling implements Serializable {
             return this;
         }
         
-        public BestellingBuilder klantID(int klnat){
+        public BestellingBuilder klantID(int klantID){
             this.klantID = klantID;
             return this;
         }

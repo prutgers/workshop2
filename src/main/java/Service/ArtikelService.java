@@ -5,20 +5,18 @@
  */
 package Service;
 
-import DAO.Hibernate.ArtikelDAOHibernate;
 import POJO.Artikel;
-import View.ArtikelView;
-import interfaceDAO.BestellingArtikelDAO;
 import java.util.ArrayList;
 import interfaceDAO.IArtikelDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Peter
  */
+@Component
 public class ArtikelService {
-    
     private static IArtikelDAO DAO;
     
     @Autowired

@@ -11,20 +11,26 @@ package Controller;
  */
 
 
-import DAO.MySQL.BestellingArtikelDAOMySQL;
+import Config.SpringConfig;
 import View.ArtikelView;
-import DAOFactory.DAOFactory;
 import POJO.Artikel;
 import Service.ArtikelService;
 import View.ArtikelKeuzeView;
-import interfaceDAO.ArtikelDAO;
-import interfaceDAO.BestellingArtikelDAO;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
  *
  * @author Peter
  */
 public class ArtikelController {
+    
+    public ArtikelService artikelService;
+    
+    public ArtikelController() {
+        ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        this.artikelService = context.getBean(ArtikelService.class);
+    }
         
     public static void startKeuze(){
         ArtikelKeuzeView view = new ArtikelKeuzeView();   
@@ -61,12 +67,13 @@ public class ArtikelController {
         ArtikelView aView = new ArtikelView();
         aView.create();
         Artikel artikel = new Artikel();
-        artikel.setArtikel_naam(aView.getArtikel_naam());
-        artikel.setArtikel_prijs(aView.getArtikel_prijs());
-        artikel.setArtikel_voorraad(aView.getArtikel_voorraad());
+        artikel.setArtikelNaam(aView.getArtikel_naam());
+        artikel.setArtikelPrijs(aView.getArtikel_prijs());
+        artikel.setArtikelVoorraad(aView.getArtikel_voorraad());
         
-        ArtikelService AS = new ArtikelService();
-        AS.create(artikel);
+        artikelService.save(artikel);
+        
+        
     }
     
     public static void update(){
@@ -74,38 +81,34 @@ public class ArtikelController {
         aView.update();
         Artikel artikel = new Artikel();                      
 
-        artikel.setArtikel_id(aView.getArtikel_id());
-        artikel.setArtikel_naam(aView.getArtikel_naam());
-        artikel.setArtikel_voorraad(aView.getArtikel_voorraad());
-        artikel.setArtikel_prijs(aView.getArtikel_prijs());
+        artikel.setArtikelID(aView.getArtikel_id());
+        artikel.setArtikelNaam(aView.getArtikel_naam());
+        artikel.setArtikelVoorraad(aView.getArtikel_voorraad());
+        artikel.setArtikelPrijs(aView.getArtikel_prijs());
          
-        
-        ArtikelService AS = new ArtikelService();
-        AS.update(artikel);
+        artikelService.update(artikel);
         
     }
     
     public static void delete(){
         ArtikelView aView = new ArtikelView();
         aView.delete();
-        
-        ArtikelService AS = new ArtikelService();
-        AS.delete(aView.getArtikel_id());
+        artikelService.delete(aView.getArtikel_id());
      }
     
     public static void readByID(){
         ArtikelView aView = new ArtikelView();
         aView.readArtikelById();
         
-        ArtikelService AS = new ArtikelService();
-        aView.print(AS.readByID(aView.getArtikel_id()));
+        
+        aView.print(artikelService.findById(aView.getArtikel_id()));
     }
     
     public static void readAll(){
         //nodig om de print functie aan te roepen
         ArtikelView aView = new ArtikelView();
         
-        ArtikelService AS = new ArtikelService();
-        aView.print(AS.readAll());
+        
+        aView.print(artikelService.findAll());
     }
 }

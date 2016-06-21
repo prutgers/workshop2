@@ -31,6 +31,9 @@ public class Artikel {
    public Artikel(){
     }
    
+    public void setArtikelID(int artikelId){
+        this.artikelId = artikelId;
+    }
    
     /**
      * @return the artikel_ID
@@ -63,7 +66,7 @@ public class Artikel {
     /**
      * @param artikelVoorraad the artikel_voorraad to set
      */
-    public void setArtikel_voorraad(int artikelVoorraad) {
+    public void setArtikelVoorraad(int artikelVoorraad) {
         this.artikelVoorraad = artikelVoorraad;
     }
 
@@ -77,7 +80,7 @@ public class Artikel {
     /**
      * @param artikel_prijs the artikel_prijs to set
      */
-    public void setArtikel_prijs(BigDecimal artikel_prijs) {
+    public void setArtikelPrijs(BigDecimal artikel_prijs) {
         this.artikelPrijs = artikelPrijs;
     }
 
