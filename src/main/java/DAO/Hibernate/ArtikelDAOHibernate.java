@@ -7,11 +7,13 @@ package DAO.Hibernate;
 
 import POJO.Artikel;
 import interfaceDAO.IArtikelDAO;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Peter
  */
+@Component
 public class ArtikelDAOHibernate extends GenericDAO<Artikel, Integer> implements IArtikelDAO {
     
     public ArtikelDAOHibernate() {

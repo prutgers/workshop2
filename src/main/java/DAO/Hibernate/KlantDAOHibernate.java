@@ -8,6 +8,7 @@ package DAO.Hibernate;
 import POJO.*;
 import java.util.ArrayList;
 import interfaceDAO.IKlantDAO;
+import org.springframework.stereotype.Component;
 //import org.hibernate.Query;
 //import org.hibernate.Session;
 //import org.hibernate.SessionFactory;
@@ -20,6 +21,7 @@ import interfaceDAO.IKlantDAO;
  *
  * @author Gebruiker
  */
+@Component
 public class KlantDAOHibernate extends GenericDAO<Klant,Integer> implements IKlantDAO {
     
     public KlantDAOHibernate() {
