@@ -1,6 +1,7 @@
 package DAO.Hibernate;
 
 import POJO.Adres;
+import interfaceDAO.IAdresDAO;
 import org.springframework.stereotype.Component;
 /*import POJO.Artikel;
 import POJO.Bestelling;
@@ -19,7 +20,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;*/
  */
 
 @Component
-public class AdresDAOHibernate extends GenericDAO<Adres,Integer> {
+public class AdresDAOHibernate extends GenericDAO<Adres,Integer> implements IAdresDAO{
     public AdresDAOHibernate() {
         super(Adres.class);
     }
