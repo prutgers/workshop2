@@ -78,9 +78,9 @@ public class Artikel {
     }
 
     /**
-     * @param artikel_prijs the artikel_prijs to set
+     * @param artikelPrijs the artikel_prijs to set
      */
-    public void setArtikelPrijs(BigDecimal artikel_prijs) {
+    public void setArtikelPrijs(BigDecimal artikelPrijs) {
         this.artikelPrijs = artikelPrijs;
     }
 
