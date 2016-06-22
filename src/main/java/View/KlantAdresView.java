@@ -10,7 +10,6 @@ package View;
  * @author lucas
  */
 
-import DAOFactory.DAOFactory;
 import POJO.KlantAdres;
 import formatMessage.PrintFormat;
 import java.util.ArrayList;

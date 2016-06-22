@@ -16,11 +16,13 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Gebruiker
  */
+@Component
 public class AccountDAOHibernate {
     
     private Session currentSession;

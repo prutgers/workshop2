@@ -4,6 +4,8 @@ import DAO.Hibernate.*;
 import POJO.Adres;
 import interfaceDAO.*;
 import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
@@ -11,10 +13,12 @@ import java.util.ArrayList;
  * 
  */
 
+@Component
 public class AdresService {
     
     private static IAdresDAO DAO;
     
+    @Autowired
     public AdresService(IAdresDAO adresDAO){
         DAO = adresDAO;
     }

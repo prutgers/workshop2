@@ -5,11 +5,15 @@ import java.util.ArrayList;
 
 import POJO.Account;
 import DAO.Hibernate.AccountDAOHibernate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
  
+@Component 
 public class AccountService {
 
 	private static AccountDAOHibernate accountDao;
-
+        
+        @Autowired
 	public AccountService() {
 		accountDao = new AccountDAOHibernate();
 	}
