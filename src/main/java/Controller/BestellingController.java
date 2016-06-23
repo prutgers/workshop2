@@ -54,7 +54,7 @@ public class BestellingController {
                 update();
                 break;
             case 3:
-                BestellingArtikelController.update();
+               // BestellingArtikelController.update();
                 break;
             case 4:
                 readAll();
@@ -71,7 +71,7 @@ public class BestellingController {
                 readArtikelen();
                 break;
             case 8:
-                BestellingArtikelController.delete();
+               // BestellingArtikelController.delete();
                 break;
             case 9:
                 delete();

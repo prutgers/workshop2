@@ -6,9 +6,9 @@
 
 
 /**
+ * Alleen nodig voor delete en update deze functies werken nu niet!
  * 
- * 
- *  Allemaal niet meer nodig
+ *  
  *
 package Controller;
 
@@ -21,6 +21,7 @@ public class BestellingArtikelController {
     
     private static BestellingArtikelView view  = new BestellingArtikelView();
     private static BestellingArtikelService BS = new BestellingArtikelService();
+    
     
     public static void create(){
         view.readUpdate();
