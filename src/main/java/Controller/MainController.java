@@ -32,15 +32,11 @@ public class MainController {
             case 4:
                 new AdresController().startKeuze();
                 break;
-            case 5:
-                ConfigController.setConnection();
-                ConfigController.setDatabase();
-                break;
             case 0:
                 System.exit(0);
                 break;
             default:
-                System.out.println("Maak een keuze: 1, 2, 3, 4, 5 of 0");
+                System.out.println("Maak een keuze: 1, 2, 3, 4 of 0");
                 break;
         }
         hoofdMenu(); //Infinite recursion klopt: dat is de bedoeling
